@@ -1,9 +1,9 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://westcoastcharts.dev/schema/1.1.1-rc.8/wcc-options.schema.json",
+ "$id": "https://westcoastcharts.dev/schema/1.1.1-rc.9/wcc-options.schema.json",
  "title": "West Coast Charts options",
  "description": "The options object of new WestCoastCharts(el, options), generated from types/*.d.ts. Functions are marked \"x-wcc-type\": \"function\" (not expressible in JSON). Premium chart types and their plotOptions need west-coast-charts/premium (\"x-wcc-license\": \"premium\").",
- "x-wcc-version": "1.1.1-rc.8",
+ "x-wcc-version": "1.1.1-rc.9",
  "type": "object",
  "properties": {
   "annotations": {

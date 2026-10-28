@@ -1,6 +1,6 @@
 {
   "name": "west-coast-charts",
-  "version": "1.1.1-rc.8",
+  "version": "1.1.1-rc.9",
   "description": "MIT Core, free chart types and optional validation/describe helpers.",
   "license": "MIT",
   "main": "dist/west-coast-charts.common.js",
@@ -184,7 +184,7 @@
     "dist/locales/zh-cn.json",
     "dist/locales/zh-tw.json",
     "dist/schema/wcc-describe.schema.json",
-    "dist/schema/wcc-options.1.1.1-rc.8.schema.json",
+    "dist/schema/wcc-options.1.1.1-rc.9.schema.json",
     "dist/schema/wcc-options.schema.json",
     "dist/types/bar-race.common.js",
     "dist/types/bar-race.esm.js",
@@ -261,8 +261,8 @@
   ],
   "wccDistribution": {
     "kind": "public-mit-core-distribution",
-    "sourceCommit": "ae155cf2ffd0424a8cfcbac188c2ae4198ab2d7b",
-    "sourceTag": "v1.1.1-rc.8",
+    "sourceCommit": "b6f323a10ea2378d39c7d894af9372f690cfff82",
+    "sourceTag": "v1.1.1-rc.9",
     "premiumRuntimeIncluded": false,
     "sourceRepositoryIncluded": false
   }

@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts option validator v1.1.1-rc.8
+ * West Coast Charts option validator v1.1.1-rc.9
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {
@@ -17540,7 +17540,7 @@
   	}
   };
   var SCHEMA = {
-  	"x-wcc-version": "1.1.1-rc.8",
+  	"x-wcc-version": "1.1.1-rc.9",
   	type: type,
   	properties: properties,
   	additionalProperties: additionalProperties,
@@ -19074,11 +19074,16 @@
   const plugin = {
     name: 'west-coast-charts/agent/validate',
     install(WCC, hook) {
+      // Fail before registering any handlers/statics or retaining the library.
+      // Older cores validate their already-normalized options at init instead.
+      if (!hook.core || hook.core.validationInput !== 1) {
+        throw new Error('WestCoastCharts validator needs the original-input validation protocol. Update Core and agent/validate together to matching releases.');
+      }
       lib = WCC;
       hook.static('validate', validateHere);
       hook.static('applyFixes', applyFixes);
       if (!('validateMode' in WCC)) hook.static('validateMode', 'warn');
-      hook.on('init', ctx => check(ctx, ctx.opts));
+      hook.on('validateInput', (ctx, input) => check(ctx, input));
       hook.on('beforeUpdate', (ctx, ch) => {
         if (ch && ch.kind === 'options') check(ctx, ch.value, 'WestCoastCharts updateOptions()');
       });

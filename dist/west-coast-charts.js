@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts v1.1.1-rc.8
+ * West Coast Charts v1.1.1-rc.9
  * Based on ApexCharts 4.7.0 - (c) 2018-2025 ApexCharts
  * Modifications (c) 2026 West Coast Software
  * Released under the MIT License.
@@ -2854,7 +2854,16 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
     if (arg.name && installedNames[arg.name]) return WCC;
     installed.push(arg);
     installedNames[name] = true;
-    arg.install(WCC, hookFor(WCC, name, extra));
+    try {
+      arg.install(WCC, hookFor(WCC, name, extra));
+    } catch (e) {
+      // In particular, a plugin may reject an incompatible core before it
+      // registers anything. Do not mark that failed attempt as installed.
+      const index = installed.indexOf(arg);
+      if (index !== -1) installed.splice(index, 1);
+      delete installedNames[name];
+      throw e;
+    }
     return WCC;
   }
   function isInstalled(name) {
@@ -2938,6 +2947,8 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
    * call is a cheap `has()` check, so the core behaves exactly as before.
    *
    * Phases (ctx = chart instance):
+   *   validateInput(ctx, options)  optional validator: owned pre-normalization input,
+   *                                synchronous, before init; never retained by core
    *   init(ctx)                    constructor, after modules exist
    *   configure(ctx, w)            start of every create(): w.config may be adjusted
    *   paint(ctx, w, elGraph)       after the chart type drew its series
@@ -41334,6 +41345,10 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       // West Coast Charts: tolerate malformed options instead of throwing
       // Own mutable option/data containers before guards, presets or plugins run.
       // Functions and opaque instances retain their identity (Utils.clone).
+      // The optional validator checks a separate owned input before Config adds
+      // renderer bookkeeping. Keep it local: no retained caller reference, and
+      // no extra data copy when the validator is absent.
+      const validationInput = features.has('validateInput') ? Utils$1.clone(opts) : undefined;
       opts = normalizeOptions(Utils$1.clone(opts));
       this.opts = opts;
       this.ctx = this;
@@ -41356,6 +41371,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       this.w.globals.chartID = this.w.config.chart.id ? Utils$1.escapeString(this.w.config.chart.id) : this.w.globals.cuid;
       const initCtx = new InitCtxVariables(this);
       initCtx.initModules();
+      features.emit('validateInput', this, validationInput);
       features.init(this); // WCC feature seam (src/features)
 
       this.lastUpdateOptions = null;
@@ -42422,6 +42438,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
   // what plugins get as hook.core: the module map of the plugin bridge, plus
   // the named helpers the premium bundle reads (src/premium/hook.js)
   Object.assign(plugins.core, {
+    validationInput: 1,
     modules: coreModules,
     Utils: Utils$1,
     Animations,
