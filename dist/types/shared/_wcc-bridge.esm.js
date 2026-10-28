@@ -1,0 +1,6 @@
+/*!
+ * West Coast Charts chart types v1.1.1-rc.7
+ * Plugin for West Coast Charts: WestCoastCharts.use(types)
+ * (c) 2026 West Coast Software - Released under the MIT License.
+ */
+function s(s){const e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:{};return"function"==typeof e.__wccInstallFeature?e.__wccInstallFeature(s):(e.__wccPendingFeatures=e.__wccPendingFeatures||[]).push(s),s}function e(s){if(!s)throw new Error("WestCoastCharts: this plugin needs a West Coast Charts core with plugin support");a=(s["modules/Animations"]||{}).default,t=(s["modules/Fill"]||{}).default,n=(s["modules/Filters"]||{}).default,function(s){u=s.default}(s["modules/Graphics"]||{}),function(s){i=s.SANS,l=s.MOTION_TOKENS,o=s.PRESETS,r=s.resolveEasing,f=s.CVD_PALETTES}(s["modules/themes/Presets"]||{}),function(s){d=s.radialDomain,c=s.formatDomainValue,m=s.usesGaugeRenderer}(s["modules/types/GaugeMath"]||{}),function(s){p=s.default}(s["utils/DateTime"]||{}),function(s){h=s.markDefault,g=s.isUserFn,w=s.escapeHtml,_=s.cssColor,T=s.safeImageHref,E=s.trustedHTML}(s["utils/Html"]||{}),function(s){F=s.default}(s["utils/Utils"]||{})}let a,t,n,u,i,l,o,r,f,d,c,m,p,h,g,w,_,T,E,F;export{m as _,u as a,d as b,c,n as d,t as e,r as f,s as g,F as h,g as i,T as j,w as k,_ as l,E as m,h as n,p as o,a as p,f as q,o as r,e as s,i as t,l as u};

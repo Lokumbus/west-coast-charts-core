@@ -1,0 +1,153 @@
+{
+  "name": "de",
+  "options": {
+    "months": [
+      "Januar",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember"
+    ],
+    "shortMonths": [
+      "Jan",
+      "Feb",
+      "Mär",
+      "Apr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dez"
+    ],
+    "days": [
+      "Sonntag",
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag"
+    ],
+    "shortDays": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+    "toolbar": {
+      "exportToSVG": "SVG speichern",
+      "exportToPNG": "PNG speichern",
+      "exportToCSV": "CSV speichern",
+      "menu": "Menü",
+      "selection": "Auswahl",
+      "selectionZoom": "Auswahl vergrößern",
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern",
+      "pan": "Verschieben",
+      "reset": "Zoom zurücksetzen"
+    },
+    "wcc": {
+      "drilldown": {
+        "root": "Alle",
+        "back": "Zurück",
+        "loading": "Wird geladen",
+        "error": "Details konnten nicht geladen werden",
+        "retry": "Erneut versuchen",
+        "hasDetails": "mit Details",
+        "hint": "Klicken für Details",
+        "path": "Drilldown-Pfad",
+        "level": "{label}, Ebene {depth} von {total}, {n} Einträge"
+      },
+      "link": {
+        "summary": "{n} von {total} Datensätzen",
+        "filters": "{n} Filter",
+        "clearAll": "Alle zurücksetzen",
+        "filtered": "Gefiltert auf {keys}: {n} von {total} Datensätzen",
+        "selectedAsFilter": "als Filter ausgewählt",
+        "cleared": "Filter zurückgesetzt: {n} von {total} Datensätzen",
+        "remove": "Filter {keys} entfernen",
+        "brush": "{from} bis {to}, Eingabe filtert",
+        "region": "Aktive Filter",
+        "percent": "{n}\u202f%",
+        "ofTotal": "von {total}",
+        "total": "Gesamt"
+      },
+      "highlight": {
+        "part": "Teil",
+        "label": "{part} von {whole} ({share})",
+        "notInFilter": "nicht im Filter",
+        "applied": "Hervorhebung angewendet",
+        "cleared": "Hervorhebung entfernt",
+        "describe": "{n} von {m} Punkten hervorgehoben",
+        "ofWhole": "/ {whole}",
+        "keyWhole": "Gesamt",
+        "keyPart": "Gefiltert"
+      },
+      "trellis": {
+        "panels": "Small Multiples, {n} Felder",
+        "back": "Zurück zu allen Feldern",
+        "allPanels": "Alle Felder",
+        "expanded": "Feld {key} vergrößert",
+        "restored": "Alle Felder angezeigt",
+        "noData": "Keine Daten"
+      },
+      "orient": {
+        "left": "Nach links drehen",
+        "right": "Nach rechts drehen",
+        "reset": "Ausrichtung zurücksetzen",
+        "turned": "Um {deg}° {dir} gedreht.",
+        "cw": "im Uhrzeigersinn",
+        "ccw": "gegen den Uhrzeigersinn",
+        "at": "{name} ist {pos}.",
+        "start": "Der Anfang ({name}) ist {pos}.",
+        "home": "Standardausrichtung.",
+        "top": "oben",
+        "right_": "rechts",
+        "bottom": "unten",
+        "left_": "links",
+        "angle": "{deg}° im Uhrzeigersinn von oben"
+      },
+      "history": {
+        "undo": "{label} rückgängig",
+        "redo": "{label} wiederholen",
+        "undid": "{label} rückgängig gemacht",
+        "redid": "{label} wiederholt",
+        "kinds": {
+          "zoom": "Zoom",
+          "pan": "Verschieben",
+          "legend": "Sichtbarkeit der Reihen",
+          "selection": "Auswahl",
+          "drill": "Drilldown",
+          "highlight": "Hervorhebung",
+          "perspective": "Ansicht",
+          "annotation": "Anmerkung",
+          "filter": "Filter",
+          "data": "Datenänderung"
+        }
+      },
+      "narrative": {
+        "play": "Abspielen",
+        "pause": "Pause",
+        "live": "Live",
+        "step": "Schritt",
+        "stepBack": "Vorheriges Bild",
+        "stepForward": "Nächstes Bild",
+        "speed": "Geschwindigkeit",
+        "timeline": "Zeitleiste"
+      },
+      "storyboard": {
+        "nav": "Story-Schritte"
+      },
+      "common": {
+        "loading": "Wird geladen",
+        "close": "Schließen",
+        "more": "Mehr"
+      }
+    }
+  }
+}

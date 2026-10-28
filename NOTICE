@@ -1,0 +1,82 @@
+West Coast Charts
+=================
+
+Based on ApexCharts 4.7.0 (MIT)
+-------------------------------
+This project is an independent fork of ApexCharts version 4.7.0, supplied
+under the MIT License (git tag v4.7.0, commit
+1e93a0d47b834111cf616fb6c78a263bbae7c1d8, 2025-04-25).
+
+  Original work: Copyright (c) 2018 ApexCharts - MIT License
+  Modifications: Copyright (c) 2026 West Coast Software - MIT License
+
+The full MIT license text, including the original copyright notice, is in
+LICENSE and must be kept in all copies or substantial portions of the
+software.
+
+"ApexCharts" is a name/brand of its respective owner. This project is not
+affiliated with, endorsed by, or sponsored by ApexCharts, and does not use
+that name for itself. References to ApexCharts in this repository exist only
+for attribution and to describe API compatibility (the `ApexCharts` alias
+export, the `apexcharts-*` CSS class names and the ApexOptions type names
+are kept so that existing code keeps working).
+
+Clean-room boundary
+-------------------
+The inherited ApexCharts implementation is version 4.7.0 (MIT); the repository
+also contains new West Coast Charts work. The documented implementation rule
+prohibits copying or using ApexCharts 5.0.0+ source, bundles, tarballs or type
+files. The separate specification research described in docs/spec/00-index.md
+used public descriptions of later behaviour and API facts (option names,
+types and defaults). It records that descriptions were independently written
+and later source/bundles/type files were not used. Implementers work from that
+specification, not later upstream implementation material. These records do
+not mean that later public documentation was never consulted. See README.md,
+"Rules for contributors".
+
+License scope: MIT and commercial parts
+---------------------------------------
+Core and MIT-marked source and declarations retain the MIT License in LICENSE.
+The commercially supplied Premium distribution, update delivery and support
+are governed by premium/LICENSE. premium/README.md explains the scope and
+premium/FILE-LICENSES.json inventories the release tarball, including the six
+optional layer modules. Existing MIT grants are not withdrawn or restricted:
+all src/premium JavaScript sources and types/premium.d.ts retain their explicit
+MIT notices, including rights in that code when included in a bundle. A
+commercial bundle banner does not extinguish those independent rights.
+No ApexCharts code is relicensed. The MIT core never imports Premium.
+
+Third-party components bundled in dist/ keep their own licenses: see
+THIRD-PARTY-LICENSES.txt (svg.js and plugins, monotone-cubic-spline - all
+MIT) and dist/*.LICENSE.txt.
+
+Map data (optional modules in maps/, not part of the library bundle)
+-------------------------------------------------------------------
+maps/world.js, maps/world.json - 177 countries, 1:110m
+  Geometry: world-atlas 2.0.2 (countries-110m.json), Copyright 2013-2019
+  Michael Bostock, ISC License; derived from Natural Earth.
+  Attributes (name, ISO 3166 codes, continent, subregion): Natural Earth
+  1:110m Cultural Vectors, Admin 0 - Countries. Natural Earth is in the
+  public domain (https://www.naturalearthdata.com/about/terms-of-use/).
+maps/us-states.js, maps/us-states.json - 50 states, DC and territories, 1:10m
+  Geometry: us-atlas 3.0.1 (states-10m.json), Copyright 2013-2019 Michael Bostock,
+  ISC License; derived from US Census Bureau cartographic boundary files
+  (public domain).
+Sources are kept in maps/source/; tools/build-maps.js trims properties,
+drops unused objects/arcs and writes the modules (about 40 kB gzipped each).
+Only data files were taken from these packages; no code from them is used.
+The TopoJSON decoder, antimeridian cutting and projections (Equal Earth:
+Savric, Patterson & Jenny 2018; Albers / Mercator: Snyder 1987) are our own
+implementations in src/premium/map/geo.js.
+
+ISC License (world-atlas, us-atlas):
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted, provided that the above
+  copyright notice and this permission notice appear in all copies.
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.

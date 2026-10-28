@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WestCoast Charts — Free Core</title><style>body{font:16px system-ui;margin:40px auto;max-width:900px;padding:0 20px;color:#18354b}#chart{min-height:360px}</style>
+<h1>Your first Free Core chart</h1><p>This local example needs no account, key or network request.</p><div id="chart"></div>
+<script src="./dist/west-coast-charts.full.min.js"></script>
+<script>new WestCoastCharts(document.querySelector('#chart'), {chart:{type:'bar',height:360,animations:{enabled:false}},series:[{name:'Requests',data:[24,38,31,52]}],xaxis:{categories:['Mon','Tue','Wed','Thu']},colors:['#237f9b']}).render();</script></html>
