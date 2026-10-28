@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts chart types v1.1.1-rc.7
+ * West Coast Charts chart types v1.1.1-rc.8
  * Plugin for West Coast Charts: WestCoastCharts.use(types)
  * (c) 2026 West Coast Software - Released under the MIT License.
  */
@@ -7757,7 +7757,8 @@
             stats: st
           }
         };
-        if (d.fillColor) p.fillColor = d.fillColor;
+        // WccDatum: an explicit fill wins over the general item colour.
+        if (d.fillColor || d.color) p.fillColor = d.fillColor || d.color;
         return p;
       });
       return {

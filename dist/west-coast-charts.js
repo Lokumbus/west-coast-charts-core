@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts v1.1.1-rc.7
+ * West Coast Charts v1.1.1-rc.8
  * Based on ApexCharts 4.7.0 - (c) 2018-2025 ApexCharts
  * Modifications (c) 2026 West Coast Software
  * Released under the MIT License.
@@ -94,17 +94,40 @@
           cloneResult[i] = v === null || typeof v !== 'object' ? v : Array.isArray(v) && Utils._flat(v) ? v.slice() : this.clone(v, visited);
         }
       } else if (source instanceof Date) {
-        cloneResult = new Date(source.getTime());
+        try {
+          cloneResult = new Date(Date.prototype.getTime.call(source));
+        } catch (_) {
+          return source; // A Date prototype alone does not provide a Date slot.
+        }
+        visited.set(source, cloneResult);
       } else if (!Utils._plain(source)) {
+        // Probe the intrinsic slot directly: Symbol.toStringTag/getTime may
+        // be overridden (or throw), and cross-realm Dates fail instanceof.
+        try {
+          cloneResult = new Date(Date.prototype.getTime.call(source));
+          visited.set(source, cloneResult);
+          return cloneResult;
+        } catch (_) {
+          // Not a Date; opaque values retain identity below.
+        }
         // WCC: class instances, DOM nodes, Maps... are shared, not copied
         // (copying them produced prototype-less husks and walked whole charts)
         return source;
       } else {
         cloneResult = {};
         visited.set(source, cloneResult);
-        for (let prop in source) {
-          if (source.hasOwnProperty(prop)) {
-            cloneResult[prop] = this.clone(source[prop], visited);
+        for (const prop of Object.keys(source)) {
+          const value = this.clone(source[prop], visited);
+          // Treat a JSON __proto__ key as data, never as a prototype setter.
+          if (prop === '__proto__') {
+            Object.defineProperty(cloneResult, prop, {
+              value,
+              enumerable: true,
+              writable: true,
+              configurable: true
+            });
+          } else {
+            cloneResult[prop] = value;
           }
         }
       }
@@ -41309,7 +41332,9 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
     constructor(el, opts) {
       ensureGlobals();
       // West Coast Charts: tolerate malformed options instead of throwing
-      opts = normalizeOptions(opts);
+      // Own mutable option/data containers before guards, presets or plugins run.
+      // Functions and opaque instances retain their identity (Utils.clone).
+      opts = normalizeOptions(Utils$1.clone(opts));
       this.opts = opts;
       this.ctx = this;
 
@@ -41794,6 +41819,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       if (options === null || typeof options !== 'object') {
         return Promise.resolve(this);
       }
+      options = Utils$1.clone(options);
       features.beforeUpdate(this, 'options', options);
       if ('series' in options) {
         options = {
@@ -41847,6 +41873,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
     updateSeries(newSeries = [], animate = true, overwriteInitialSeries = true) {
       const failed = this._wccFailed('updateSeries');
       if (failed) return failed;
+      newSeries = Utils$1.clone(newSeries);
       features.beforeUpdate(this, 'series', newSeries);
       newSeries = normalizeSeries(newSeries, this.w.config.chart.requestedType || this.w.config.chart.type);
       this.series.resetSeries(false, true, true, newSeries);
@@ -41862,6 +41889,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
     appendSeries(newSerie, animate = true, overwriteInitialSeries = true) {
       const failed = this._wccFailed('appendSeries');
       if (failed) return failed;
+      newSerie = Utils$1.clone(newSerie);
       features.beforeUpdate(this, 'appendSeries', newSerie);
       let newSeries = this.w.config.series.slice();
       newSeries.push(newSerie);
@@ -41880,6 +41908,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       let me = this;
       const failed = this._wccFailed('appendData');
       if (failed) return failed;
+      newData = Utils$1.clone(newData);
       features.beforeUpdate(this, 'append', newData);
       me.w.globals.dataChanged = true;
       me.series.getPreviousPaths();
@@ -42130,21 +42159,21 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       if (context) {
         me = context;
       }
-      me.annotations.addXaxisAnnotationExternal(opts, pushToMemory, me);
+      me.annotations.addXaxisAnnotationExternal(Utils$1.clone(opts), pushToMemory, me);
     }
     addYaxisAnnotation(opts, pushToMemory = true, context = undefined) {
       let me = this;
       if (context) {
         me = context;
       }
-      me.annotations.addYaxisAnnotationExternal(opts, pushToMemory, me);
+      me.annotations.addYaxisAnnotationExternal(Utils$1.clone(opts), pushToMemory, me);
     }
     addPointAnnotation(opts, pushToMemory = true, context = undefined) {
       let me = this;
       if (context) {
         me = context;
       }
-      me.annotations.addPointAnnotationExternal(opts, pushToMemory, me);
+      me.annotations.addPointAnnotationExternal(Utils$1.clone(opts), pushToMemory, me);
     }
     clearAnnotations(context = undefined) {
       let me = this;
