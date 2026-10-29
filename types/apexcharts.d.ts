@@ -1506,7 +1506,7 @@ type ApexPlotOptions = {
         offsetY?: number,
         /** Text style of the totals. */
         style?: {
-          /** Text colour of the totals. Default: `'#373d3f'`. */
+          /** Text colour of the totals; unset inherits `chart.foreColor`. An explicit colour overrides the theme. */
           color?: string,
           /** Font size of the totals. Default: `'12px'`. */
           fontSize?: string,

@@ -1446,9 +1446,10 @@ type WccGanttOptions = WccPremiumCommon & {
   barRadius?: number
   /**
    * `'input'` keeps the series order; `'start'` sorts the tasks of each group by start, then end.
+   * `'end'` sorts by end time; `'name'` sorts by locale-aware task name. Equal keys retain input order. Group order is unchanged.
    * Default: `'input'`.
    */
-  sort?: 'input' | 'start'
+  sort?: 'input' | 'start' | 'end' | 'name'
   /** Task table to the left of the timeline (right in RTL). */
   grid?: {
     /** `false` hides the table and gives the timeline the full width. Default: `true`. */

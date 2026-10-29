@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts option validator v1.1.1-rc.9
+ * West Coast Charts option validator v1.1.1
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {
@@ -11984,7 +11984,9 @@
   			sort: {
   				type: "string",
   				"enum": [
+  					"end",
   					"start",
+  					"name",
   					"input"
   				]
   			},
@@ -17540,7 +17542,7 @@
   	}
   };
   var SCHEMA = {
-  	"x-wcc-version": "1.1.1-rc.9",
+  	"x-wcc-version": "1.1.1",
   	type: type,
   	properties: properties,
   	additionalProperties: additionalProperties,

@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts chart types v1.1.1-rc.9
+ * West Coast Charts chart types v1.1.1
  * Plugin for West Coast Charts: WestCoastCharts.use(types)
  * (c) 2026 West Coast Software - Released under the MIT License.
  */
@@ -1575,6 +1575,28 @@
 
   // ---------------------------------------------------------------- arc (parliament)
   const rad = deg => deg * Math.PI / 180;
+  /** Fit a measured two-line label inside the empty upper semicircle. */
+  function fitArcLabelBox(box, cx, cy, inner) {
+    const {
+      x,
+      y,
+      width: W,
+      height: H
+    } = box;
+    const R = inner - 2;
+    const B = 4;
+    if (![x, y, W, H, cx, cy, R].every(finite$f) || !(W > 0 && H > 0 && R > B)) return null;
+    const corners = [[x, y], [x + W, y], [x, y + H], [x + W, y + H]];
+    if (corners.every(([px, py]) => py <= cy - B && Math.hypot(px - cx, py - cy) <= R)) return null;
+    const A = W * W / 4 + H * H;
+    const b = 2 * B * H;
+    const k = Math.min(1, 2 * (R * R - B * B) / (Math.sqrt(b * b + 4 * A * (R * R - B * B)) + b));
+    return {
+      k,
+      x: cx - k * (x + W / 2),
+      y: cy - B - k * (y + H)
+    };
+  }
   function arc(marks, rect, o) {
     const ao = o.arc || {};
     const a0 = rad(finite$f(ao.startAngle) ? ao.startAngle : -90);
@@ -1943,16 +1965,6 @@
   // shapes passed by reference in options are swapped for a name before the
   // options are merged (deep merges do not keep their methods)
   const REFS = {};
-  let refSeq = 0;
-  function shapeName(shape) {
-    if (!shape || !shape.isUnitShape) return shape;
-    if (SHAPES$1[shape.name] === shape) return shape.name;
-    const hit = Object.keys(REFS).find(k => REFS[k] === shape);
-    if (hit) return hit;
-    const key = `wcc-shape-${++refSeq}`;
-    REFS[key] = shape;
-    return key;
-  }
   function shapeRef(name) {
     return REFS[name] || null;
   }
@@ -2457,11 +2469,9 @@
   }
 
   // unit / waffle: no category axis conversion (it would empty opts.labels);
-  // unit shapes travel as names through the option merge
+  // unit shape values stay chart-owned; Utils.extend replaces their branded value atomically
   function unitForced(opts) {
     setPath(opts, 'xaxis.tickPlacement', 'between');
-    const pos = getPath(opts, 'plotOptions.unit.positions');
-    if (pos && pos.isUnitShape) setPath(opts, 'plotOptions.unit.positions', shapeName(pos));
     const mark = getPath(opts, 'plotOptions.unit.pictogram.mark');
     if (mark && typeof mark === 'object' && !Array.isArray(mark)) setPath(opts, 'plotOptions.unit.pictogram.mark', markName(mark));
   }
@@ -12870,9 +12880,12 @@
         const c = L.clusters[0];
         const total = this.model.categories.reduce((a, k) => a + (k.hidden ? 0 : k.count), 0);
         const size = Math.max(14, Math.min(40, c.inner * 0.42));
+        // Both lines belong inside the hemicycle; the baseline is the plot's
+        // lower edge and the legend may start immediately below it.
+        const labelY = c.cy - 8;
         const tv = el$1('text', {
           x: f2$2(c.cx),
-          y: f2$2(c.cy - size * 0.35),
+          y: f2$2(labelY - size * 0.62 - 4),
           'text-anchor': 'middle',
           'font-size': f2$2(size),
           'font-weight': 650,
@@ -12883,7 +12896,7 @@
         tv.textContent = groupedNumber(total);
         const tl = el$1('text', {
           x: f2$2(c.cx),
-          y: f2$2(c.cy - size * 0.35 + size * 0.62 + 4),
+          y: f2$2(labelY),
           'text-anchor': 'middle',
           'font-size': 11,
           'font-weight': 500,
@@ -12893,6 +12906,17 @@
         tl.textContent = this.o.arc && this.o.arc.label || 'seats';
         lg.appendChild(tv);
         lg.appendChild(tl);
+        // Measure in the chart's real SVG/CSS context. Narrow inner holes need
+        // both lines scaled together, not pushed up into the surrounding seats.
+        this.root.appendChild(lg);
+        const temporary = !this.root.isConnected;
+        if (temporary) w.globals.dom.elGraphical.node.appendChild(this.root);
+        try {
+          const f = fitArcLabelBox(lg.getBBox(), c.cx, c.cy, c.inner);
+          if (f) lg.setAttribute('transform', `translate(${f.x} ${f.y}) scale(${f.k})`);
+        } finally {
+          if (temporary) this.root.remove();
+        }
       }
       if (fadeIn) {
         const timing = drawTiming(w);
