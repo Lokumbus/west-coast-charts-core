@@ -1,0 +1,35 @@
+name: Collect upstream issue and advisory metadata
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '21 7 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check collector using offline fixtures
+        run: node --test tools/test-collect-upstream-risk.mjs tools/test-upstream-proposal.mjs
+      - name: Collect public metadata only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node tools/collect-upstream-risk.mjs --out upstream-risk-proposal.json --max-pages 10
+      - name: Require complete declared feed coverage
+        run: node tools/check-upstream-proposal.mjs upstream-risk-proposal.json
+      - name: Upload proposal for human triage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-risk-proposal-${{ github.run_id }}
+          path: upstream-risk-proposal.json
+          if-no-files-found: error
+          retention-days: 30

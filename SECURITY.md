@@ -1,94 +1,25 @@
 # Security policy
 
+This policy covers the publicly released WestCoast Charts Free Core repository and its published Core artifacts. It is not a security certification or a guarantee that every vulnerability will be found.
+
 ## Supported versions
 
-| Version | Security fixes |
-| --- | --- |
-| 1.x (current) | yes |
-| pre-1.0 builds (`4.7.0-wcc.*`) | no, please upgrade |
-| ApexCharts 4.7.0 and earlier (upstream) | not covered by this project |
+The supported stable release line is **1.1.x**. Security fixes are prepared for the newest supported patch release. Pre-1.0 builds (`4.7.0-wcc.*`) are not supported; please upgrade. ApexCharts 4.7.0 and earlier are upstream software and are not covered by this project.
 
-Fixes are released as patch versions of the newest 1.x minor. When a fix
-needs a breaking change, the advisory says so and names the migration.
+## Report a vulnerability
 
-## Reporting a vulnerability
+Use GitHub's [private vulnerability reporting form](https://github.com/Lokumbus/west-coast-charts-core/security/advisories/new) or email [service@pekagi.io](mailto:service@pekagi.io) with **Security report** in the subject. Include the affected package version or commit, component, observed impact, and a minimal reproduction where possible. Do not send licence keys, signing material, customer data, or other secrets. Please do not publish an unpatched report in a public issue.
 
-Please **do not open a public issue** for a suspected vulnerability.
+A maintainer checks the email inbox on working days, records incoming reports for assessment, and aims to acknowledge a report within three business days and provide an initial assessment within ten business days. These are best-effort targets, not service guarantees; complex reports may take longer.
 
-Report it privately through one of these channels:
+## Assessment and disclosure
 
-- **Email:** `<security contact - to be filled in before the first public release>`
-- **GitHub:** "Report a vulnerability" (private vulnerability reporting) on
-  the repository's Security tab, once the public repository exists.
+Reports are assessed against the code and versions actually released. For inherited dependency issues, the assessment checks whether the relevant code is present, reachable, and affected. A confirmed public issue record includes affected versions, impact, evidence, status, and any fix and verification. Private reporter details and secrets are not published.
 
-Please include:
+A GitHub Security Advisory is created only for a confirmed vulnerability affecting a public release when coordinated public disclosure is appropriate. Ordinary defects and unconfirmed reports use the normal issue process. Advisories and platform notifications require human review and approval; GitHub, npm, and Dependabot notifications depend on platform indexing and recipient settings and are not guaranteed delivery channels.
 
-- the affected version (`WestCoastCharts.version` or the package version)
-  and entry (`west-coast-charts`, `/full`, `/types`, `/features/<name>`,
-  `/premium`, ...);
-- a minimal configuration or page that reproduces the problem;
-- the impact you see (for example script execution, data leak, denial of
-  service through a crafted config);
-- whether the issue is already public.
+## Release approval
 
-You may write in English or German.
+Automated agents may prepare changes and checks, but may not publish or deploy them. A human maintainer reviews and explicitly approves every agent-prepared package, security, runtime, or website publication. The release record identifies the reviewed source commit, artifact hashes, checks, approver, approval date, and destinations.
 
-## What happens next
-
-| Step | Target |
-| --- | --- |
-| Acknowledgement of your report | within 3 working days |
-| First assessment (confirmed or not, severity) | within 10 working days |
-| Fix or mitigation for confirmed high/critical issues | as fast as possible, aim 30 days |
-| Public advisory (GitHub Security Advisory, CVE where it applies) and CHANGELOG entry | with the fixed release |
-
-We credit reporters in the advisory unless you prefer not to be named.
-Please give us a reasonable time to ship a fix before you publish details;
-we will agree on a disclosure date with you.
-
-Actively exploited vulnerabilities in a released version are reported to
-the authorities where the EU Cyber Resilience Act requires it.
-
-## Scope
-
-In scope: everything published in the `west-coast-charts` npm package -
-the core, `/full`, `/types`, `/features/*`, `/renderer-canvas`, `/premium`,
-maps, locales and type definitions.
-
-Typical issue classes:
-
-- script injection (XSS) through series names, labels, categories,
-  annotations, data tables, tooltips or exported SVG;
-- formula injection in CSV export;
-- crashes or hangs from malformed configs or data (denial of service);
-- bypass of `chart.sanitizeHtml`;
-- licence-key handling in the premium entry.
-
-Out of scope:
-
-- markup you pass through `chart.sanitizeHtml: false` or a custom
-  sanitizer function (you opt out of our sanitizing there);
-- HTML returned by your own formatters when sanitizing is turned off;
-- the demo website and showcase pages, unless the same issue affects the
-  library;
-- vulnerabilities in ApexCharts 5.x or later (a different product; we do not
-  use its code).
-
-## How the library handles untrusted input
-
-- Labels, names and categories are written as text, never as HTML.
-- HTML is only accepted where the API documents it (formatter output,
-  `tooltip.custom`, `legend.markers.customHTML`, ...). It is parsed in an
-  inert `<template>` and sanitized unless `chart.sanitizeHtml` is `false`.
-  Trusted Types are supported through the `west-coast-charts` policy.
-- The library does not use `eval`, `new Function` or string timers.
-- The published package has **no runtime dependencies**. The few MIT
-  packages inlined into `dist/` are listed in `THIRD-PARTY-LICENSES.txt`
-  and in the SBOM (`sbom/west-coast-charts.cdx.json`, CycloneDX 1.5).
-- Past fixes are documented in `SECURITY-FIXES.md`.
-
-## Release integrity
-
-- `npm run sbom` regenerates the SBOM; `npm run pack:check` packs the
-  package and checks entries, types and bundle isolation before a release.
-- `npm audit --omit=dev` must report zero runtime vulnerabilities at release.
+See the [maintenance and security policy](https://westcoast-charts.com/maintenance/) for the supported release line, public issue ledger fields, release evidence, and SBOM status.

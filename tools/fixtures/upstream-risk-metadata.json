@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "githubIssues": [
+    { "source": "github-issues", "id": "GH-3937", "number": 3937, "title": "Tooltips evaluate malicious javascript by default", "state": "closed", "url": "https://github.com/apexcharts/apexcharts.js/issues/3937", "createdAt": "2023-07-20T00:00:00Z", "updatedAt": "2023-07-20T00:00:00Z", "labels": [] },
+    { "source": "github-issues", "id": "GH-3937", "number": 3937, "title": "Tooltips evaluate malicious javascript by default", "state": "closed", "url": "https://github.com/apexcharts/apexcharts.js/issues/3937", "createdAt": "2023-07-20T00:00:00Z", "updatedAt": "2023-07-20T00:00:00Z", "labels": [] }
+  ],
+  "githubAdvisories": [
+    { "source": "github-advisory-database", "id": "GHSA-w46j-8hm6-h8mm", "cve": "CVE-2021-23327", "summary": "XSS in apexcharts", "severity": "moderate", "url": "https://github.com/advisories/GHSA-w46j-8hm6-h8mm", "publishedAt": "2021-02-11T20:47:34Z", "updatedAt": "2023-09-12T00:00:00Z", "affected": [] }
+  ],
+  "osvVulnerabilities": [
+    { "source": "osv", "id": "GHSA-w46j-8hm6-h8mm", "aliases": ["CVE-2021-23327"], "summary": "XSS in apexcharts", "publishedAt": "2021-02-11T20:47:34Z", "updatedAt": "2025-01-14T08:57:20Z", "affected": [], "references": [] }
+  ],
+  "npmAdvisories": [
+    { "source": "npm-advisory-bulk", "id": "npm-1093801", "summary": "XSS in apexcharts", "severity": "moderate", "url": "https://github.com/advisories/GHSA-w46j-8hm6-h8mm", "vulnerableVersionRange": "<3.24.0", "cwe": ["CWE-79"], "cvss": { "score": 6.3 } }
+  ],
+  "issueQueries": [
+    { "query": "repo:apexcharts/apexcharts.js is:issue security", "totalCount": 1, "pagesFetched": 1, "pageSize": 100, "truncated": false },
+    { "query": "repo:apexcharts/apexcharts.js is:issue unsafe", "totalCount": null, "pagesFetched": 0, "pageSize": 100, "truncated": true, "error": "HTTP 403 rate limited" }
+  ]
+}
