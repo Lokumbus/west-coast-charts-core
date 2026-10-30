@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts chart types v1.1.1
+ * West Coast Charts chart types v1.1.2
  * Plugin for West Coast Charts: WestCoastCharts.use(types)
  * (c) 2026 West Coast Software - Released under the MIT License.
  */

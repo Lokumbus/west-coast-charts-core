@@ -1,9 +1,4 @@
-/*!
- * West Coast Charts v1.1.1
- * Based on ApexCharts 4.7.0 - (c) 2018-2025 ApexCharts
- * Modifications (c) 2026 West Coast Software
- * Released under the MIT License.
- */
+/*! West Coast Charts v1.1.2 | MIT | (c)2018-2025 ApexCharts 4.7.0 | (c)2026 West Coast Software */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -223,13 +218,11 @@
       if (typeof hex !== 'string' || !/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(hex)) {
         hex = '#999999';
       }
-      let h = hex.replace('#', '');
-      h = h.match(new RegExp('(.{' + h.length / 3 + '})', 'g'));
-      for (let i = 0; i < h.length; i++) {
-        h[i] = parseInt(h[i].length === 1 ? h[i] + h[i] : h[i], 16);
-      }
-      if (typeof opacity !== 'undefined') h.push(opacity);
-      return 'rgba(' + h.join(',') + ')';
+      const h = hex.slice(1);
+      const value = parseInt(h.length === 3 ? h.replace(/./g, c => c + c) : h, 16);
+      // The validated value occupies at most 24 bits. Keep Array#join's existing
+      // opacity conversion (including null/undefined), without a dynamic RegExp.
+      return 'rgba(' + [value >> 16, value >> 8 & 255, value & 255, opacity].join(',') + ')';
     }
     static getOpacityFromRGBA(rgba) {
       return parseFloat(rgba.replace(/^.*,(.+)\)/, '$1'));
@@ -331,9 +324,7 @@
       };
     }
     static escapeString(str, escapeWith = 'x') {
-      let newStr = str.toString().slice();
-      newStr = newStr.replace(/[` ~!@#$%^&*()|+\=?;:'",.<>{}[\]\\/]/gi, escapeWith);
-      return newStr;
+      return str.toString().replace(/[` ~!@#$%^&*()|+\=?;:'",.<>{}[\]\\/]/gi, escapeWith);
     }
     static negToZero(val) {
       return val < 0 ? 0 : val;
@@ -3629,11 +3620,13 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
   /** a value as the axis labels show it (axis i, default the first) */
   function fmt(w, v, a, i) {
     if (a && a.timeValues()) return a.fmtX(v);
-    // radial bars are percentages (as in the data table)
-    if (a && a.isRadial()) return Math.round(v * 10) / 10 + '%';
     const tx = w.globals.wccA11y;
-    const f = tx && tx.format ? tx.format : w.globals.yLabelFormatters && w.globals.yLabelFormatters[i || 0];
+    // Plain radialBar values are percentages. Gauge renderers can use a custom
+    // value domain or formatter, so their overview must share the same formatter
+    // as the visible value and data table.
     try {
+      if (a && a.isRadial()) return tx && typeof tx.format === 'function' ? String(tx.format(v)) : Math.round(v * 10) / 10 + '%';
+      const f = tx && tx.format || w.globals.yLabelFormatters && w.globals.yLabelFormatters[i || 0];
       // an integer keeps no padded decimals in prose ("28", not "28.0")
       const t = tidyNumber(typeof f === 'function' ? String(f(v, {
         w
@@ -3687,13 +3680,8 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       }
     }, k);
     const span = (list, k) => spanValues(add => list.forEach(add), k, false);
-    let all;
-    let r;
-    if (pie) {
-      all = gl.series.filter(v => typeof v === 'number' && !isNaN(v));
-      r = span(all);
-    } else {
-      r = spanSeries(null);
+    const r = pie ? span(gl.series.filter(v => typeof v === 'number' && !isNaN(v))) : spanSeries(null);
+    if (!pie) {
       const n = about ? about.points : Math.max(0, ...gl.series.map(s => s ? s.length : 0));
       points = (n === 1 ? S.point1 : S.points).replace('{n}', n);
     }
@@ -23712,9 +23700,12 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
               });
             }
             highestY = maxY;
-            val = Utils$1.noExponents(val);
-            if (Utils$1.isFloat(val)) {
-              gl.yValueDecimal = Math.max(gl.yValueDecimal, val.toString().split('.')[1].length);
+            if (val % 1 !== 0) {
+              const valueString = '' + val;
+              // noExponents rounds exponent-notation values, which add no decimals.
+              if (!valueString.includes('e')) {
+                gl.yValueDecimal = Math.max(gl.yValueDecimal, valueString.length - valueString.indexOf('.') - 1);
+              }
             }
             if (minY > ((_seriesMin$i2 = seriesMin[i]) === null || _seriesMin$i2 === void 0 ? void 0 : _seriesMin$i2[j]) && ((_seriesMin$i3 = seriesMin[i]) === null || _seriesMin$i3 === void 0 ? void 0 : _seriesMin$i3[j]) < 0) {
               minY = seriesMin[i][j];
@@ -28555,9 +28546,9 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       });
 
       // Re-calculate tooltip dimensions now that we have drawn the text
-      const tooltipEl = this.ttCtx.getElTooltip();
-      this.ttCtx.tooltipRect.ttWidth = tooltipEl.getBoundingClientRect().width;
-      this.ttCtx.tooltipRect.ttHeight = tooltipEl.getBoundingClientRect().height;
+      const tooltipRect = this.ttCtx.getElTooltip().getBoundingClientRect();
+      this.ttCtx.tooltipRect.ttWidth = tooltipRect.width;
+      this.ttCtx.tooltipRect.ttHeight = tooltipRect.height;
     }
     printLabels({
       i,
@@ -30139,9 +30130,6 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       const chartWithmarkers = type === 'area' || type === 'line' || type === 'scatter' || type === 'bubble' || type === 'radar';
       let hoverArea = w.globals.dom.Paper.node;
       const elGrid = this.getElGrid();
-      if (elGrid) {
-        this.seriesBound = elGrid.getBoundingClientRect();
-      }
       let tooltipY = [];
       let tooltipX = [];
       let seriesHoverParams = {
@@ -30334,12 +30322,18 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       const tooltipEl = this.getElTooltip(chartCtx);
       if (!tooltipEl) return;
 
-      // tooltipRect is calculated on every mousemove, because the text is dynamic
+      // Axis tooltips measure their updated text in drawSeriesTexts before
+      // positioning. Skip this pre-update layout read when that later measure
+      // will replace it; fixed tooltips still need their existing dimensions.
+      const rect = w.globals.axisCharts && !ttCtx.fixedTooltip ? {
+        width: 0,
+        height: 0
+      } : tooltipEl.getBoundingClientRect();
       ttCtx.tooltipRect = {
         x: 0,
         y: 0,
-        ttWidth: tooltipEl.getBoundingClientRect().width,
-        ttHeight: tooltipEl.getBoundingClientRect().height
+        ttWidth: rect.width,
+        ttHeight: rect.height
       };
       ttCtx.e = e;
 
@@ -30353,8 +30347,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       if (w.globals.axisCharts) {
         ttCtx.axisChartsTooltips({
           e,
-          opt,
-          tooltipRect: ttCtx.tooltipRect
+          opt
         });
       } else {
         // non-plot charts i.e pie/donut/circle
@@ -36919,6 +36912,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
           for (let q = 0; q < pts.x.length; q++) pa[realIndex].push([pts.x[q], pts.y[q]]);
           continue;
         }
+        if (this._dense && this.ctx._wccNoDensePath) continue;
         let pointsPos = this.lineHelpers.calculatePoints({
           series,
           x,
@@ -39008,7 +39002,24 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
         transform: `translate(${cnf.chart.offsetX}, ${cnf.chart.offsetY})`
       });
       gl.dom.Paper.node.style.background = cnf.theme.mode === 'dark' && !cnf.chart.background ? '#343A3F' : cnf.theme.mode === 'light' && !cnf.chart.background ? '#fff' : cnf.chart.background;
-      this.setSVGDimensions();
+
+      // Resolve the configured tooltip value font in the existing first layout,
+      // rather than triggering another cold layout after the chart is drawn.
+      // The temporary, out-of-flow node is removed synchronously before return.
+      const ts = cnf.tooltip;
+      const fontProbe = ts.enabled && ts.custom === undefined && gl.dom.Paper.plain('0').font({
+        family: ts.style.fontFamily || cnf.chart.fontFamily,
+        size: ts.style.fontSize,
+        weight: 600
+      }).attr({
+        opacity: 0,
+        'aria-hidden': true
+      });
+      try {
+        this.setSVGDimensions();
+      } finally {
+        if (fontProbe) fontProbe.remove();
+      }
       gl.dom.elLegendForeign = document.createElementNS(gl.SVGNS, 'foreignObject');
       Graphics.setAttrs(gl.dom.elLegendForeign, {
         x: 0,
@@ -39250,15 +39261,12 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       const widthUnit = cnf.chart.width.toString().split(/[0-9]+/g).pop();
       if (widthUnit === '%') {
         if (Utils$1.isNumber(elDim[0])) {
-          if (elDim[0].width === 0) {
-            elDim = Utils$1.getDimensions(this.el.parentNode);
-          }
           gl.svgWidth = elDim[0] * parseInt(cnf.chart.width, 10) / 100;
         }
       } else if (widthUnit === 'px' || widthUnit === '') {
         gl.svgWidth = parseInt(cnf.chart.width, 10);
       }
-      const heightUnit = String(cnf.chart.height).toString().split(/[0-9]+/g).pop();
+      const heightUnit = String(cnf.chart.height).split(/[0-9]+/g).pop();
       if (gl.svgHeight !== 'auto' && gl.svgHeight !== '') {
         if (heightUnit === '%') {
           const elParentDim = Utils$1.getDimensions(this.el.parentNode);

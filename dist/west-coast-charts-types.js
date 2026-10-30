@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts chart types v1.1.1
+ * West Coast Charts chart types v1.1.2
  * Plugin for West Coast Charts: WestCoastCharts.use(types)
  * (c) 2026 West Coast Software - Released under the MIT License.
  */
@@ -10165,6 +10165,9 @@
       };
       w.globals.wccA11y = {
         value: s => text(s),
+        // Overview extrema use the same domain-aware value formatting as the
+        // visible gauge label and table (not radialBar's default percent text).
+        format: v => String(this.valueText(v)),
         category: () => '',
         table: () => ({
           head: ['Series', 'Value'],
