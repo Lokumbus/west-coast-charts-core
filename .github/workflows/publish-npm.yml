@@ -6,7 +6,7 @@ permissions:
   id-token: write
 jobs:
   publish:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: npm-publication
     steps:
@@ -29,4 +29,4 @@ jobs:
             releases/*.tgz
             release-archive.json
           if-no-files-found: error
-      - run: npm publish "$WCC_TARBALL" --access public --provenance
+      - run: npm publish "./$WCC_TARBALL" --access public --provenance
