@@ -1,4 +1,4 @@
-/*! West Coast Charts v1.1.2 | MIT | (c)2018-2025 ApexCharts 4.7.0 | (c)2026 West Coast Software */
+/*! West Coast Charts v1.1.3 | MIT | (c)2018-2025 ApexCharts 4.7.0 | (c)2026 West Coast Software */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -33814,14 +33814,13 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
       let xDivision = w.globals.gridWidth / w.globals.dataPoints;
       let yDivision = w.globals.gridHeight / w.globals.series.length;
       let y1 = 0;
-      let rev = false;
+      const rev = !!w.config.yaxis[0].reversed;
       this.negRange = this.helpers.checkColorRange();
-      let heatSeries = series.slice();
-      if (w.config.yaxis[0].reversed) {
-        rev = true;
-        heatSeries.reverse();
-      }
-      for (let i = rev ? 0 : heatSeries.length - 1; rev ? i < heatSeries.length : i >= 0; rev ? i++ : i--) {
+      const rowIndexes = Array.from({
+        length: series.length
+      }, (_, i) => i);
+      if (!rev) rowIndexes.reverse();
+      for (const i of rowIndexes) {
         // el to which series will be drawn
         let elSeries = graphics.group({
           class: `apexcharts-series apexcharts-heatmap-series`,
@@ -33849,7 +33848,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
           }
 
           // Stop loop if index is out of array length
-          if (j >= heatSeries[i].length) break;
+          if (j >= series[i].length) break;
           let heatColor = this.helpers.getShadeColor(w.config.chart.type, i, j, this.negRange);
           let color = heatColor.color;
           let heatColorProps = heatColor.colorProps;
@@ -33913,7 +33912,7 @@ ${r('.apexcharts-menu-item')} { color: var(--wcc-tooltip-text); font-size: var(-
             i,
             j,
             colorProps: heatColorProps,
-            series: heatSeries,
+            series,
             bg: heatColor.color
           });
           if (dataLabels !== null) {

@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts option validator v1.1.2
+ * West Coast Charts option validator v1.1.3
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {
@@ -17542,7 +17542,7 @@
   	}
   };
   var SCHEMA = {
-  	"x-wcc-version": "1.1.2",
+  	"x-wcc-version": "1.1.3",
   	type: type,
   	properties: properties,
   	additionalProperties: additionalProperties,

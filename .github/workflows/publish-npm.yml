@@ -16,4 +16,17 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
       - run: node scripts/verify-core.mjs
-      - run: npm publish --access public --provenance
+      - run: node scripts/check-security-policy.mjs
+      - name: Verify the exact reviewed release archive
+        run: |
+          node scripts/verify-release-archive.mjs
+          node -e "const d=require('./release-archive.json');require('node:fs').appendFileSync(process.env.GITHUB_ENV,'WCC_TARBALL='+d.archive+'\n')"
+      - name: Retain exactly the archive sent to npm
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-npm-archive
+          path: |
+            releases/*.tgz
+            release-archive.json
+          if-no-files-found: error
+      - run: npm publish "$WCC_TARBALL" --access public --provenance
