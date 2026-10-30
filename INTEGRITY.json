@@ -11,7 +11,7 @@
     },
     {
       "path": "PROVENANCE.json",
-      "sha256": "37bbfa4983219dd7622f46142259254dd38ee0267efc039fcaabbad3b5a60200"
+      "sha256": "842502ea39132e7a858d5e26c40a9907cf63e8df33adcbc34e3f42c9d17ec9db"
     },
     {
       "path": "README.md",
@@ -19,7 +19,7 @@
     },
     {
       "path": "SECURITY.md",
-      "sha256": "8fb3a972c29da4febdbb4be20770bc7b427c2d08486ea3065b1da2b49fa646b4"
+      "sha256": "28f676b1ac966a1a60f450e86b63ee0026cbd8773fc598ea13a7eec96ea21e23"
     },
     {
       "path": "THIRD-PARTY-LICENSES.txt",

@@ -22,9 +22,12 @@
     },
     {
       "path": "SECURITY.md",
-      "bytes": 3818,
-      "sha256": "8fb3a972c29da4febdbb4be20770bc7b427c2d08486ea3065b1da2b49fa646b4",
-      "source": "SECURITY.md"
+      "bytes": 2688,
+      "sha256": "28f676b1ac966a1a60f450e86b63ee0026cbd8773fc598ea13a7eec96ea21e23",
+      "source": "SECURITY.md",
+      "sourceRepository": "https://github.com/Lokumbus/west-coast-charts-core",
+      "sourceCommit": "63afd57",
+      "origin": "public-security-policy"
     },
     {
       "path": "THIRD-PARTY-LICENSES.txt",
@@ -1016,5 +1019,12 @@
       "sha256": "427d2d7dd6659d0562404d4b48ac927bf5bfa6fba353bcb461dd679ab77dc8ce",
       "source": "types/west-coast-charts.d.ts"
     }
-  ]
+  ],
+  "securityPolicy": {
+    "sourceRepository": "https://github.com/Lokumbus/west-coast-charts-core",
+    "sourceCommit": "63afd57",
+    "path": "SECURITY.md",
+    "sha256": "28f676b1ac966a1a60f450e86b63ee0026cbd8773fc598ea13a7eec96ea21e23",
+    "note": "Maintained policy on default branch; immutable1.1.2 package/tag remain unchanged. The next patch includes this correction."
+  }
 }
