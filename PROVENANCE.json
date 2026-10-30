@@ -1,8 +1,8 @@
 {
   "distribution": "public-mit-core-distribution",
   "version": "1.1.2",
-  "sourceCommit": "371c5b977a31905300107c969ef7a2e5db22d9ea",
-  "sourceTag": null,
+  "sourceCommit": "853d26e1664aac05836b6a15d16e1050556cb61c",
+  "sourceTag": "v1.1.2",
   "sourceRepositoryIncluded": false,
   "premiumRuntimeIncluded": false,
   "license": "MIT",

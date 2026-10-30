@@ -262,8 +262,8 @@
   ],
   "wccDistribution": {
     "kind": "public-mit-core-distribution",
-    "sourceCommit": "371c5b977a31905300107c969ef7a2e5db22d9ea",
-    "sourceTag": null,
+    "sourceCommit": "853d26e1664aac05836b6a15d16e1050556cb61c",
+    "sourceTag": "v1.1.2",
     "premiumRuntimeIncluded": false,
     "sourceRepositoryIncluded": false
   }

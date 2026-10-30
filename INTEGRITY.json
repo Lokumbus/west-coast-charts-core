@@ -11,11 +11,11 @@
     },
     {
       "path": "PROVENANCE.json",
-      "sha256": "b05b2146dfd60ee2ab1221275a338f2e5f9aedb7f954149f3797df7f3a140fc0"
+      "sha256": "37bbfa4983219dd7622f46142259254dd38ee0267efc039fcaabbad3b5a60200"
     },
     {
       "path": "README.md",
-      "sha256": "178a9662751a722c389eb30d30042484aec86e16bcdad62899bd5c776a4cad64"
+      "sha256": "542aa806e0ed3bca5a9b1d95ae23d6fbefcbd725367095714a7487ec7aafa650"
     },
     {
       "path": "SECURITY.md",
@@ -655,7 +655,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "e5312bbd22cb54137a530af41492b0ee854d45d03973edbac62d082568fc4f56"
+      "sha256": "ecb3093f94141e07eefd6c17d9707385205cc57f3819156a5ebe7616f599c0a1"
     },
     {
       "path": "types/agent-describe.d.ts",
