@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts chart.describe() v1.1.3
+ * West Coast Charts chart.describe() v1.1.4
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {

@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts option validator v1.1.3
+ * West Coast Charts option validator v1.1.4
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {
@@ -17542,7 +17542,7 @@
   	}
   };
   var SCHEMA = {
-  	"x-wcc-version": "1.1.3",
+  	"x-wcc-version": "1.1.4",
   	type: type,
   	properties: properties,
   	additionalProperties: additionalProperties,
@@ -18607,6 +18607,12 @@
     const sib = Object.keys(props);
     const absolute = t => concrete(t, parts.concat(key));
 
+    // Gauge options are validated and consumed through radialBar. Keep this
+    // recovery scoped to Gauge charts; there is no runtime plotOptions.gauge alias.
+    if (ctx.type === 'gauge' && parentT === 'plotOptions' && key === 'gauge') {
+      push('plotOptions.radialBar', 0.01, 'gauge-options');
+    }
+
     // 1. path aliases ('legend.enabled' -> 'legend.show', 'scales.x' -> 'xaxis') and legacy keys
     const pa = PATH_ALIASES[fullT] || LEGACY[fullT];
     if (pa) {
@@ -18786,11 +18792,16 @@
           value: tr[val]
         };
         issue.hint += ` (value ${JSON.stringify(tr[val])})`;
-      } else if (n && (fits(n, val) || val && typeof val === 'object')) issue.fix = {
-        op: 'rename',
-        from: path,
-        to: best.path
-      };else if (n) issue.hint += ` It takes ${describeType(n)}.`;
+      } else if (n && (fits(n, val) || val && typeof val === 'object')) {
+        // Renaming over a sibling object can overwrite radialBar fields during
+        // applyFixes. Suggest the destination, but require a deliberate merge.
+        const gaugeConflict = best.path === 'plotOptions.radialBar' && ctx.type === 'gauge' && ctx.root && ctx.root.plotOptions && Object.prototype.hasOwnProperty.call(ctx.root.plotOptions, 'radialBar');
+        if (!gaugeConflict) issue.fix = {
+          op: 'rename',
+          from: path,
+          to: best.path
+        };
+      } else if (n) issue.hint += ` It takes ${describeType(n)}.`;
     } else {
       const {
         props

@@ -1,4 +1,4 @@
-/*! West Coast Charts v1.1.3 | MIT | (c)2018-2025 ApexCharts 4.7.0 | (c)2026 West Coast Software */
+/*! West Coast Charts v1.1.4 | MIT | (c)2018-2025 ApexCharts 4.7.0 | (c)2026 West Coast Software */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
