@@ -8,7 +8,8 @@ import test from 'node:test'
 
 const root = process.cwd()
 const script = path.resolve('scripts/verify-release-archive.mjs')
-const archiveName = 'releases/west-coast-charts-1.1.3.tgz'
+const releaseDescriptor = JSON.parse(fs.readFileSync(path.join(root, 'release-archive.json'), 'utf8'))
+const archiveName = releaseDescriptor.archive
 const hash = b => createHash('sha256').update(b).digest('hex')
 function fixture(t) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wcc-archive-verifier-'))
@@ -31,7 +32,8 @@ test('verifies the exact prepacked archive and prints its pinned hash', t => {
   const dir = fixture(t)
   const result = run(dir)
   assert.equal(result.status, 0, result.stderr)
-  assert.match(result.stdout, /PASS west-coast-charts-1\.1\.3\.tgz sha256=1e8eb60fe2f32d33d67e44f2a18d90e701f9459ae84a3b54129838dc8a18130f/)
+  const archiveFile = archiveName.split('/').at(-1)
+  assert.ok(result.stdout.includes(`PASS ${archiveFile} sha256=${releaseDescriptor.sha256}`), result.stdout)
 })
 
 test('rejects archive tampering and missing archive files', t => {
