@@ -2554,6 +2554,8 @@ type WccVitalsParam = {
   decimals?: number
   /** Ring colour; not set uses the palette. */
   color?: string
+  /** 'cells' / 'trace' / 'range': radial space to the next layer in pixels. Default: `15`. */
+  gap?: number
   /** 'range': caller-supplied bands for the low value, independent of the high-value bands. */
   bandsLow?: ApexCharts.RadialVitalsBand[]
   /** Missing low bands: classify only high (default) or explicitly share high bands. An implicit high-only fallback warns once. */

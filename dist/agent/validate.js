@@ -17462,6 +17462,9 @@
   			color: {
   				type: "string"
   			},
+  			gap: {
+  				type: "number"
+  			},
   			bandsLow: {
   				type: "array",
   				items: {
@@ -19087,8 +19090,19 @@
     // an unknown plugin-object field a free-form namespace by accident.
     return Object.keys(head).every(key => props[key] && (head[key] === undefined || fits(props[key], head[key])));
   }
+
+  /** Exact string facet selectors declare application-owned series metadata. */
+  function trellisDimensionKey(ctx, parts, key) {
+    if (parts.length !== 2 || parts[0] !== 'series' || !Number.isInteger(parts[1])) return false;
+    const tr = ctx.root && ctx.root.trellis;
+    if (!tr || typeof tr !== 'object' || Array.isArray(tr)) return false;
+    const given = v => v !== undefined && v !== null && v !== '';
+    // Match the split/normalize contract: row/column take precedence over by.
+    const selectors = given(tr.row) || given(tr.column) ? [tr.row, tr.column] : [tr.by];
+    return selectors.some(selector => typeof selector === 'string' && selector === key);
+  }
   function unknown(ctx, obj, k, s, parts, open) {
-    if (open && pluginOptionsDictionary(ctx, parts)) return;
+    if (open && (pluginOptionsDictionary(ctx, parts) || trellisDimensionKey(ctx, parts, k))) return;
     const val = obj[k];
     const cands = suggestKey(ctx, parts, k, val, s);
     const where = fmt(parts);
