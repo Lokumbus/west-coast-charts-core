@@ -1,4 +1,5 @@
 /// <reference path="./wcc-options.d.ts" />
+/// <reference path="./premium-events.d.ts" />
 // West Coast Charts - TypeScript declarations of the ApexCharts-compatible API (global script:
 // `ApexCharts` / `WestCoastCharts` class plus the Apex* option types). The West Coast Charts
 // additions (extra chart types, premium types, features) are declared in wcc-options.d.ts.
@@ -143,6 +144,8 @@ declare class ApexCharts {
   static validateMode?: 'warn' | 'error' | 'off'
   /** West Coast Charts: register TopoJSON / GeoJSON for chart.type 'map' (west-coast-charts/premium) */
   static registerMap(name: string, data: object): boolean
+  /** Premium map registry metadata for validation; null when no map is registered. */
+  static getMapMetadata?: (source: string | object, objectName?: string | null) => { name: string; ids: string[]; keys: string[] } | null
   /**
    * West Coast Charts premium (present once west-coast-charts/premium is installed): the licence key
    * for every premium chart without its own chart.licenseKey. Checked offline; resolves to the payload
@@ -498,53 +501,14 @@ type ApexChart = {
   sanitizeHtml?:
     | boolean
     | ((html: string, opts: { svg: boolean }) => string | Node)
-  /**
-   * Callbacks for lifecycle and interaction events. Each receives the chart instance and an
-   * event-specific options object.
-   */
-  events?: {
+  /** Premium/feature convention: legacy (default) retains family signatures; standard uses (eventOrNull, chart, payload). Core lifecycle callbacks are unchanged. */
+  eventSignature?: 'legacy' | 'standard'
+  /** Lifecycle/core callbacks plus premium/feature events. Named precise handler types are in premium-events.d.ts; inline callbacks remain permissive for compatibility. */
+  events?: WccPremiumEvents & {
     /** Called once the initial (or update) animation of the series has finished. */
     animationEnd?(chart: any, options?: any): void
     /** Called after the options are processed and before the SVG is put into the page. */
     beforeMount?(chart: any, options?: any): void
-    /** schedule (layers/schedule): a drag, resize or keyboard move proposes a change `{ id, from, to, conflicts, added, resolved }`; the data is never changed. */
-    scheduleChange?(...args: any[]): any
-    /** schedule: an appointment or a person was selected (null = cleared). */
-    scheduleSelect?(...args: any[]): any
-    /** schedule: a click on free time `{ time, lane, by, day }`. */
-    slotClick?(...args: any[]): any
-    /** schedule: emitted once per render when the plan has conflicts (the conflicts() list). */
-    scheduleConflict?(...args: any[]): any
-    /** Gantt: a task was moved, resized or edited; return `false` to cancel. Premium charts call it as `(event, chart, info)`. */
-    taskChange?(...args: any[]): any
-    /** Gantt: a task is created; return `false` to cancel. Premium charts call it as `(event, chart, info)`. */
-    taskCreate?(...args: any[]): any
-    /** Gantt: a task is deleted; return `false` to cancel. Premium charts call it as `(event, chart, info)`. */
-    taskDelete?(...args: any[]): any
-    /** Gantt: the undo/redo history changed. Premium charts call it as `(event, chart, info)`. */
-    historyChange?(...args: any[]): any
-    /** Gantt: a group was collapsed or expanded. Premium charts call it as `(event, chart, info)`. */
-    groupToggle?(...args: any[]): any
-    /** Gantt: a dependency is created; return `false` to cancel. Premium charts call it as `(event, chart, info)`. */
-    dependencyCreate?(...args: any[]): any
-    /** Gantt: a dependency is deleted; return `false` to cancel. Premium charts call it as `(event, chart, info)`. */
-    dependencyDelete?(...args: any[]): any
-    /** Sankey: a node was dragged. Premium charts call it as `(event, chart, info)`. */
-    nodeMove?(...args: any[]): any
-    /** Tree: lazily loaded children arrived. Premium charts call it as `(event, chart, info)`. */
-    childrenLoad?(...args: any[]): any
-    /** Tree: loading children failed. Premium charts call it as `(event, chart, info)`. */
-    childrenLoadError?(...args: any[]): any
-    /** Drilldown (premium charts, sunburst, icicle): a level opens; premium charts cancel on `false`. */
-    drilldown?(...args: any[]): any
-    /** Drilldown: a level closes; premium charts cancel on `false`. */
-    drillup?(...args: any[]): any
-    /** Stock: a drawing was added, changed or removed. Premium charts call it as `(event, chart, info)`. */
-    drawingChange?(...args: any[]): any
-    /** history feature: the undo/redo position changed, `(chart, { index, size, canUndo, canRedo })`. */
-    wccHistoryChange?(...args: any[]): any
-    /** orient feature: the chart was turned, `(chart, { angle, previous, top, start, startAt, picked, ... })`. */
-    wccOrientChange?(...args: any[]): any
     /** Called after the first render is in the page. */
     mounted?(chart: any, options?: any): void
     /**

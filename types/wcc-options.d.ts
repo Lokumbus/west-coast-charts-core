@@ -1120,7 +1120,7 @@ type WccCorePlotOptionAdditions = {
 type WccPremiumPlugin = {
   /** Plugin id (state key and warnings); not set uses `plugin-<index>`. */
   name?: string
-  /** Default options of the plugin; the `['name', options]` form overrides them. */
+  /** Default options of the plugin; the `[nameOrPlugin, options]` form overrides them. */
   defaults?: { [key: string]: any }
   /** `(p) => { top, right, bottom, left }`: space in px taken from the plot before layout. */
   reserve?(p: any): { top?: number; right?: number; bottom?: number; left?: number } | void
@@ -1138,10 +1138,10 @@ type WccPremiumPlugin = {
   /** `(p)`: called before each redraw and on destroy. */
   destroy?(p: any): void
 }
-type WccPremiumPluginRef = WccPremiumPlugin | string | [string, { [key: string]: any }?]
+type WccPremiumPluginRef = WccPremiumPlugin | string | [string | WccPremiumPlugin, { [key: string]: any }?]
 
 type WccPremiumCommon = {
-  /** Plugins of this chart: plugin objects, registered names, or `['name', options]`. */
+  /** Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`. */
   plugins?: WccPremiumPluginRef[]
 }
 
@@ -2204,6 +2204,8 @@ type WccMapOptions = WccPremiumCommon & {
    * route layers but shows the whole map for choropleths. Default: `'auto'`.
    */
   fit?: 'auto' | 'data' | 'map'
+  /** Geometry used only for data framing: all region polygons, or each region's largest polygon. Drawing retains every polygon. Default: `'all'`. */
+  fitParts?: 'all' | 'largest'
   /** Zoom and pan (scale 1 to 16 by default). */
   zoom?: WccZoomOptions & {
     /** A double click on a region zooms to that region (instead of zooming in one step). Default: `true`. */
@@ -2337,7 +2339,7 @@ type WccNetworkOptions = WccPremiumCommon & {
      * polygon shells (core in the centre, groups as filled facet sectors, causal paths across;
      * options under `facet`). Default: `'force'`.
      */
-    type?: 'force' | 'facet'
+    type?: 'force' | 'facet' | 'preset'
     /** Target edge length; `'auto'` derives it from the node sizes. Default: `'auto'`. */
     linkDistance?: 'auto' | number
     /** Repulsion between nodes; `'auto'` derives it from the node sizes. Default: `'auto'`. */
@@ -2552,8 +2554,10 @@ type WccVitalsParam = {
   decimals?: number
   /** Ring colour; not set uses the palette. */
   color?: string
-  /** 'range': bands for the low value (e.g. diastolic); not set uses `bands`. */
+  /** 'range': caller-supplied bands for the low value, independent of the high-value bands. */
   bandsLow?: ApexCharts.RadialVitalsBand[]
+  /** Missing low bands: classify only high (default) or explicitly share high bands. An implicit high-only fallback warns once. */
+  bandsLowPolicy?: 'high-only' | 'shared'
   /** 'trace' / 'range': a gap longer than this many minutes breaks the line. Default: 3 slots. */
   gapAfter?: number
   /** Lower end of the value scale. */
@@ -2566,8 +2570,10 @@ type WccVitalsParam = {
 type WccVitalsClockOptions = WccPremiumCommon & {
   /** The window: start (ms or ISO), span ('24h', '12h') and slot length ('60min'). */
   time?: { start?: number | string, span?: string, step?: string }
-  /** The current time (now hand); later slots are "no data yet". */
+  /** Snapshot cutoff for all measurement channels; future measurements are excluded. */
   now?: number | string
+  /** Advance now to later appended measurements. Historical arrivals never move it backwards. Default: `false`. */
+  followNow?: boolean
   /** IANA zone of the labels. Default: the runtime's zone. */
   timeZone?: string
   /** The parameters, outermost ring first. */
@@ -3200,8 +3206,13 @@ type WccDescribeResult = {
     aggregate: { mode: WccDescribeAggregateMode; value: number | null; label: string } | null
   }>
   marks: Array<{ series: string; seriesIndex: number; category: string; value: number | null; formatted: string }>
+  /** Untruncated row count (core: maximum categories per series; Premium: table rows). It is not the flattened marks.length. */
   marksTotal: number
   marksTruncated: boolean
+  /** Map rows with no matching registered geometry, never silently treated as drawn. */
+  unmatched?: { count: number; ids: string[] }
+  /** Skipped Sankey links and their source locations; zero links are valid but not drawn. */
+  skipped?: { count: number; items: Array<{ seriesIndex: number; dataPointIndex: number; reason: string }> }
   aggregate: { mode: WccDescribeAggregateMode; value: number | null; label: string; formatted: string | null } | null
   categories?: Array<{ category: string; value: number | null }>
   scales: {
@@ -3576,6 +3587,10 @@ declare namespace ApexCharts {
     /** gauge: take the latest value of this column series (name, index or true = first); it stays in the ring */
     follow?: string | number | boolean
     /** gauge: colour by value band, ascending: [{ to: 60, color }] */
+    /** Span lower-value bands. Missing keeps the generic shared fallback; choose a policy explicitly to avoid a warning. */
+    bandsLow?: RadialVitalsBand[]
+    /** Span classification when bandsLow is absent; generic span default is shared, VitalsClock defaults high-only. */
+    bandsLowPolicy?: 'high-only' | 'shared'
     bands?: Array<{
       /** Upper value of the band (inclusive). */
       to: number
@@ -3880,6 +3895,8 @@ declare namespace ApexCharts {
 
   /** plotOptions.radialColumn */
   export interface RadialColumnOptions {
+    /** Warn once if inner rings are thinner than 8 px or heat cells below 2 px per slot. No values/layers are removed. Default: `true`. */
+    readabilityWarnings?: boolean
     /** how the column values combine in the centre, the generated description, tooltip footers and the filter note.
      *  'sum' (default) adds them into a Total — right for counts and amounts only. Use 'max' / 'min' for
      *  latencies and percentiles ('Highest p95 latency (ms): 412 (Matching · 20:00)'), 'mean' for rates,

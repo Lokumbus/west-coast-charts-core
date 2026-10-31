@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts option validator v1.1.4
+ * West Coast Charts option validator v1.1.5
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {
@@ -613,25 +613,134 @@
   					}
   				]
   			},
+  			eventSignature: {
+  				type: "string",
+  				"enum": [
+  					"legacy",
+  					"standard"
+  				]
+  			},
   			events: {
   				type: "object",
   				properties: {
-  					animationEnd: {
+  					beatChange: {
   						"x-wcc-type": "function"
   					},
-  					beforeMount: {
+  					childrenLoad: {
+  						"x-wcc-type": "function"
+  					},
+  					childrenLoadError: {
+  						"x-wcc-type": "function"
+  					},
+  					crossFilter: {
+  						"x-wcc-type": "function"
+  					},
+  					dataPointMouseEnter: {
+  						"x-wcc-type": "function"
+  					},
+  					dataPointMouseLeave: {
+  						"x-wcc-type": "function"
+  					},
+  					dataPointSelection: {
+  						"x-wcc-type": "function"
+  					},
+  					dependencyCreate: {
+  						"x-wcc-type": "function"
+  					},
+  					dependencyDelete: {
+  						"x-wcc-type": "function"
+  					},
+  					drawingChange: {
+  						"x-wcc-type": "function"
+  					},
+  					drillDownEnd: {
+  						"x-wcc-type": "function"
+  					},
+  					drillDownError: {
+  						"x-wcc-type": "function"
+  					},
+  					drillDownStart: {
+  						"x-wcc-type": "function"
+  					},
+  					drillUp: {
+  						"x-wcc-type": "function"
+  					},
+  					drilldown: {
+  						"x-wcc-type": "function"
+  					},
+  					drilldownError: {
+  						"x-wcc-type": "function"
+  					},
+  					drillup: {
+  						"x-wcc-type": "function"
+  					},
+  					error: {
+  						"x-wcc-type": "function"
+  					},
+  					filterChange: {
+  						"x-wcc-type": "function"
+  					},
+  					groupToggle: {
+  						"x-wcc-type": "function"
+  					},
+  					highlightFilterChanged: {
+  						"x-wcc-type": "function"
+  					},
+  					historyChange: {
+  						"x-wcc-type": "function"
+  					},
+  					layoutSettled: {
+  						"x-wcc-type": "function"
+  					},
+  					legendClick: {
+  						"x-wcc-type": "function"
+  					},
+  					nodeDragEnd: {
+  						"x-wcc-type": "function"
+  					},
+  					nodeMove: {
+  						"x-wcc-type": "function"
+  					},
+  					nodeToggle: {
+  						"x-wcc-type": "function"
+  					},
+  					panelMounted: {
+  						"x-wcc-type": "function"
+  					},
+  					panelPromoted: {
+  						"x-wcc-type": "function"
+  					},
+  					panelRestored: {
+  						"x-wcc-type": "function"
+  					},
+  					perspectiveApplied: {
+  						"x-wcc-type": "function"
+  					},
+  					perspectiveCaptured: {
+  						"x-wcc-type": "function"
+  					},
+  					playbackFrame: {
+  						"x-wcc-type": "function"
+  					},
+  					quintLens: {
+  						"x-wcc-type": "function"
+  					},
+  					quintPin: {
+  						"x-wcc-type": "function"
+  					},
+  					quintSelect: {
   						"x-wcc-type": "function"
   					},
   					scheduleChange: {
+  						"x-wcc-type": "function"
+  					},
+  					scheduleConflict: {
   						"x-wcc-type": "function"
   					},
   					scheduleSelect: {
   						"x-wcc-type": "function"
   					},
   					slotClick: {
-  						"x-wcc-type": "function"
-  					},
-  					scheduleConflict: {
   						"x-wcc-type": "function"
   					},
   					taskChange: {
@@ -643,40 +752,31 @@
   					taskDelete: {
   						"x-wcc-type": "function"
   					},
-  					historyChange: {
+  					trellisMounted: {
   						"x-wcc-type": "function"
   					},
-  					groupToggle: {
+  					wccDrillPathChange: {
   						"x-wcc-type": "function"
   					},
-  					dependencyCreate: {
-  						"x-wcc-type": "function"
-  					},
-  					dependencyDelete: {
-  						"x-wcc-type": "function"
-  					},
-  					nodeMove: {
-  						"x-wcc-type": "function"
-  					},
-  					childrenLoad: {
-  						"x-wcc-type": "function"
-  					},
-  					childrenLoadError: {
-  						"x-wcc-type": "function"
-  					},
-  					drilldown: {
-  						"x-wcc-type": "function"
-  					},
-  					drillup: {
-  						"x-wcc-type": "function"
-  					},
-  					drawingChange: {
+  					wccFrameChange: {
   						"x-wcc-type": "function"
   					},
   					wccHistoryChange: {
   						"x-wcc-type": "function"
   					},
+  					wccNarrativeState: {
+  						"x-wcc-type": "function"
+  					},
   					wccOrientChange: {
+  						"x-wcc-type": "function"
+  					},
+  					zoomed: {
+  						"x-wcc-type": "function"
+  					},
+  					animationEnd: {
+  						"x-wcc-type": "function"
+  					},
+  					beforeMount: {
   						"x-wcc-type": "function"
   					},
   					mounted: {
@@ -697,31 +797,16 @@
   					xAxisLabelClick: {
   						"x-wcc-type": "function"
   					},
-  					legendClick: {
-  						"x-wcc-type": "function"
-  					},
   					markerClick: {
   						"x-wcc-type": "function"
   					},
   					selection: {
   						"x-wcc-type": "function"
   					},
-  					dataPointSelection: {
-  						"x-wcc-type": "function"
-  					},
-  					dataPointMouseEnter: {
-  						"x-wcc-type": "function"
-  					},
-  					dataPointMouseLeave: {
-  						"x-wcc-type": "function"
-  					},
   					beforeZoom: {
   						"x-wcc-type": "function"
   					},
   					beforeResetZoom: {
-  						"x-wcc-type": "function"
-  					},
-  					zoomed: {
   						"x-wcc-type": "function"
   					},
   					scrolled: {
@@ -1336,8 +1421,8 @@
   			validate: {
   				type: "string",
   				"enum": [
-  					"warn",
   					"error",
+  					"warn",
   					"off"
   				]
   			}
@@ -4917,6 +5002,9 @@
   			radialColumn: {
   				type: "object",
   				properties: {
+  					readabilityWarnings: {
+  						type: "boolean"
+  					},
   					aggregate: {
   						type: "string",
   						"enum": [
@@ -5597,7 +5685,14 @@
   									type: "array",
   									prefixItems: [
   										{
-  											type: "string"
+  											anyOf: [
+  												{
+  													type: "string"
+  												},
+  												{
+  													$ref: "#/$defs/WccPremiumPlugin"
+  												}
+  											]
   										},
   										{
   											type: "object",
@@ -9809,6 +9904,19 @@
   					}
   				]
   			},
+  			bandsLow: {
+  				type: "array",
+  				items: {
+  					$ref: "#/$defs/RadialVitalsBand"
+  				}
+  			},
+  			bandsLowPolicy: {
+  				type: "string",
+  				"enum": [
+  					"high-only",
+  					"shared"
+  				]
+  			},
   			bands: {
   				anyOf: [
   					{
@@ -10112,6 +10220,9 @@
   	RadialColumnOptions: {
   		type: "object",
   		properties: {
+  			readabilityWarnings: {
+  				type: "boolean"
+  			},
   			aggregate: {
   				type: "string",
   				"enum": [
@@ -11541,7 +11652,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -11959,7 +12077,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -12976,7 +13101,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -13459,6 +13591,13 @@
   					"data"
   				]
   			},
+  			fitParts: {
+  				type: "string",
+  				"enum": [
+  					"all",
+  					"largest"
+  				]
+  			},
   			zoom: {
   				type: "object",
   				properties: {
@@ -13601,7 +13740,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -14064,7 +14210,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -14150,7 +14303,8 @@
   						type: "string",
   						"enum": [
   							"force",
-  							"facet"
+  							"facet",
+  							"preset"
   						]
   					},
   					linkDistance: {
@@ -14579,7 +14733,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -14804,7 +14965,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -15120,7 +15288,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -15834,7 +16009,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -16348,7 +16530,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -17021,7 +17210,14 @@
   							type: "array",
   							prefixItems: [
   								{
-  									type: "string"
+  									anyOf: [
+  										{
+  											type: "string"
+  										},
+  										{
+  											$ref: "#/$defs/WccPremiumPlugin"
+  										}
+  									]
   								},
   								{
   									type: "object",
@@ -17065,6 +17261,9 @@
   						type: "number"
   					}
   				]
+  			},
+  			followNow: {
+  				type: "boolean"
   			},
   			timeZone: {
   				type: "string"
@@ -17268,6 +17467,13 @@
   				items: {
   					$ref: "#/$defs/RadialVitalsBand"
   				}
+  			},
+  			bandsLowPolicy: {
+  				type: "string",
+  				"enum": [
+  					"high-only",
+  					"shared"
+  				]
   			},
   			gapAfter: {
   				type: "number"
@@ -17542,7 +17748,7 @@
   	}
   };
   var SCHEMA = {
-  	"x-wcc-version": "1.1.4",
+  	"x-wcc-version": "1.1.5",
   	type: type,
   	properties: properties,
   	additionalProperties: additionalProperties,
@@ -18332,6 +18538,106 @@
     'plotOptions.radialColumn.aggregate': 'aggregate is "sum", "mean", "max", "min" or "none": sum only counts and amounts; max/min for latencies and percentiles, mean for rates and scores.'
   };
 
+  /* Data contracts shared by the browser/CLI validator. No DOM or Premium import.
+   * Copyright (c) 2026 West Coast Software - MIT License */
+  function validateData(options, ctx, metadata) {
+    const type = options.chart && options.chart.type;
+    const series = Array.isArray(options.series) ? options.series : [];
+    const po = options.plotOptions || {};
+    const issue = (parts, message, hint, severity = 'error') => ctx.add({
+      kind: 'invalid_value',
+      severity,
+      path: parts.map((x, i) => typeof x === 'number' ? `[${x}]` : (i ? '.' : '') + x).join(''),
+      pointer: '/' + parts.map(x => String(x).replace(/~/g, '~0').replace(/\//g, '~1')).join('/'),
+      message,
+      hint
+    });
+    if (type === 'sankey' || type === 'marimekko') series.forEach((s, si) => {
+      if (!s || !Array.isArray(s.data)) return;
+      s.data.forEach((d, di) => {
+        const tuple = Array.isArray(d),
+          obj = d && typeof d === 'object' && !tuple;
+        const key = type === 'sankey' ? tuple ? 2 : obj && d.value !== undefined ? 'value' : 'y' : tuple ? 1 : obj && d.y !== undefined ? 'y' : 'value';
+        const v = tuple || obj ? d[key] : d;
+        const parts = ['series', si, 'data', di].concat(tuple || obj ? [key] : []);
+        if ((type === 'sankey' || v !== null && v !== undefined) && (typeof v !== 'number' || !Number.isFinite(v) || v < 0)) issue(parts, `${type} values must be finite numbers greater than or equal to zero.`, 'Correct the source value; invalid values must not silently become zero.');
+        if (type === 'sankey') {
+          const from = tuple ? d[0] : obj && (d.from !== undefined ? d.from : d.source);
+          const to = tuple ? d[1] : obj && (d.to !== undefined ? d.to : d.target);
+          if (from === undefined || from === null || from === '' || to === undefined || to === null || to === '') issue(['series', si, 'data', di], 'A Sankey link requires both source and target endpoints.', 'Provide from/to (or a [from, to, value] tuple).');
+        }
+      });
+    });
+    if (type === 'chord') {
+      const c = po.chord || {},
+        m = c.matrix;
+      if (Array.isArray(m)) {
+        const n = Array.isArray(c.labels) && c.labels.length ? c.labels.length : m.length;
+        if (m.length !== n) issue(['plotOptions', 'chord', 'matrix'], `Chord matrix has ${m.length} rows for ${n} labels.`, 'Provide a square matrix with one row and column per label.');
+        m.forEach((row, i) => {
+          if (!Array.isArray(row) || row.length !== n) issue(['plotOptions', 'chord', 'matrix', i], `Chord matrix row must contain ${n} values.`, 'All rows must match the label count.');
+          if (Array.isArray(row)) row.forEach((v, j) => {
+            if (typeof v !== 'number' || !Number.isFinite(v) || v < 0) issue(['plotOptions', 'chord', 'matrix', i, j], 'Chord matrix values must be finite non-negative numbers.', 'Correct the source value.');
+          });
+        });
+      }
+    }
+    if (type === 'network' && series.some(s => s && Array.isArray(s.nodes))) {
+      const ids = new Set();
+      series.forEach(s => s && Array.isArray(s.nodes) && s.nodes.filter(Boolean).forEach(n => ids.add(String(n.id !== undefined ? n.id : n.name))));
+      series.forEach((s, si) => {
+        if (!s) return;
+        const seen = new Set();
+        [s.edges ? 'edges' : 'links', 'data'].forEach(field => {
+          const edges = s[field];
+          if (edges === undefined || seen.has(edges)) return;
+          seen.add(edges);
+          if (!Array.isArray(edges)) {
+            issue(['series', si, field], 'Network edges must be an array.', 'Provide endpoint pairs or edge objects.');
+            return;
+          }
+          edges.forEach((edge, ei) => {
+            const pair = Array.isArray(edge) ? [edge[0], edge[1]] : edge && [edge.from !== undefined ? edge.from : edge.source, edge.to !== undefined ? edge.to : edge.target];
+            if (pair) pair.forEach(id => {
+              if (!ids.has(String(id))) issue(['series', si, field, ei], `Network edge references undeclared node "${id}".`, 'Declare the node explicitly or correct the edge endpoint.');
+            });
+          });
+        });
+      });
+    }
+    if (type === 'tree') {
+      const ids = new Set();
+      const visit = (nodes, path) => Array.isArray(nodes) && nodes.forEach((n, i) => {
+        if (!n || typeof n !== 'object') return;
+        const p = path.concat(i);
+        if (n.id !== undefined && n.id !== null) {
+          const id = String(n.id);
+          if (ids.has(id)) issue(p.concat('id'), `Duplicate tree node id "${id}".`, 'Use a unique id for each node; API lookup otherwise becomes ambiguous.');
+          ids.add(id);
+        }
+        visit(n.children, p.concat('children'));
+      });
+      series.forEach((s, i) => s && visit(s.data, ['series', i, 'data']));
+    }
+    if (type === 'map' && metadata) {
+      const keys = new Set((metadata.keys || []).map(x => String(x).toLowerCase()));
+      const excluded = new Set(((po.map || {}).exclude || []).map(x => String(x).toLowerCase()));
+      series.forEach((s, si) => {
+        if (!s || !Array.isArray(s.data)) return;
+        // Match GeoMap.readSeries(): an omitted type can be a coordinate, arc or
+        // route layer. Those names label marks; they are not region join keys.
+        const first = s.data.find(x => x && typeof x === 'object');
+        const inferred = first && Array.isArray(first.path) ? 'route' : first && (first.from !== undefined || first.to !== undefined) ? 'arcs' : first && (Number.isFinite(+first.lon) || Number.isFinite(+first.lng)) && first.lat !== undefined ? 'bubble' : 'choropleth';
+        const layerType = s.type || inferred;
+        if (layerType !== 'choropleth' && layerType !== 'map') return;
+        s.data.forEach((d, di) => {
+          const id = Array.isArray(d) ? d[0] : d && (d.id !== undefined ? d.id : d.x !== undefined ? d.x : d.name);
+          if (id !== undefined && !keys.has(String(id).toLowerCase()) && !excluded.has(String(id).toLowerCase())) issue(['series', si, 'data', di], `Map region "${id}" has no geometry in the registered map.`, 'Load a map with the required coverage or provide an explicit point/shape fallback.', 'warning');
+        });
+      });
+    }
+  }
+
   /*
    * West Coast Charts - option validator (west-coast-charts/agent/validate).
    *
@@ -18755,7 +19061,34 @@
       if (ch && PREMIUM_TYPES.indexOf(ch.type) > -1) licenseFor(ctx, ['chart', 'type'], ch.type);
     }
   }
+
+  /** Only a declared Premium plugin's free defaults/override dictionary owns its keys. */
+  function pluginOptionsDictionary(ctx, parts) {
+    if (parts[0] !== 'plotOptions' || parts[2] !== 'plugins' || !Number.isInteger(parts[3])) return false;
+    const pluginSchema = schema.$defs && schema.$defs.WccPremiumPlugin;
+    const list = nodeAt(`plotOptions.${parts[1]}.plugins`);
+    const item = list && res(res(list).items);
+    // Recognise the actual generated plugin-reference contract, not arbitrary
+    // application objects which happen to use a property named "plugins".
+    if (!pluginSchema || !item || !item.anyOf || !item.anyOf.some(b => res(b) === pluginSchema)) return false;
+    const po = ctx.root && ctx.root.plotOptions && ctx.root.plotOptions[parts[1]];
+    const ref = po && Array.isArray(po.plugins) && po.plugins[parts[3]];
+    const tuple = Array.isArray(ref);
+    const defaults = parts.length === 5 && parts[4] === 'defaults' && !tuple || parts.length === 6 && parts[4] === 0 && parts[5] === 'defaults' && tuple;
+    const overrides = parts.length === 5 && parts[4] === 1 && tuple;
+    if (!defaults && !overrides) return false;
+    const head = tuple ? ref[0] : ref;
+    if (typeof head === 'string') return overrides;
+    if (!head || typeof head !== 'object' || Array.isArray(head)) return false;
+    const {
+      props
+    } = propsOf(pluginSchema);
+    // Invalid hook/name fields still get their normal diagnostics. Do not grant
+    // an unknown plugin-object field a free-form namespace by accident.
+    return Object.keys(head).every(key => props[key] && (head[key] === undefined || fits(props[key], head[key])));
+  }
   function unknown(ctx, obj, k, s, parts, open) {
+    if (open && pluginOptionsDictionary(ctx, parts)) return;
     const val = obj[k];
     const cands = suggestKey(ctx, parts, k, val, s);
     const where = fmt(parts);
@@ -18953,6 +19286,7 @@
     } else {
       try {
         walk(ctx, options, schema, []);
+        validateData(options, ctx, opts.mapMetadata);
       } catch (e) {
         return {
           ok: false,
@@ -19052,6 +19386,10 @@
   function validateHere(options, opts) {
     const o = Object.assign({}, opts);
     if (!('premium' in o) && lib) o.premium = premiumOf(lib);
+    if (!o.mapMetadata && lib && typeof lib.getMapMetadata === 'function' && options && options.chart && options.chart.type === 'map') {
+      const pm = (options.plotOptions || {}).map || {};
+      o.mapMetadata = lib.getMapMetadata(pm.map || 'world', pm.object);
+    }
     return validate(options, o);
   }
   function format(result, title) {
