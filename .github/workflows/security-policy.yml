@@ -17,3 +17,7 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/check-security-policy.mjs
+      - name: Verify exported Core payload integrity
+        run: node scripts/verify-core.mjs
+      - name: Verify canonical reviewed release archive
+        run: node scripts/verify-release-archive.mjs
