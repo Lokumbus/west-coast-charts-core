@@ -20,6 +20,6 @@ Use `import WestCoastCharts from 'west-coast-charts/full'` for Core and all free
 
 MIT validation and describe helpers are exported as `west-coast-charts/agent/validate` and `west-coast-charts/agent/describe`, with matching schemas under `west-coast-charts/schema/*.json`. Shared declarations/schemas include optional Premium vocabulary; no Premium renderer or Premium export is included.
 
-No Premium/layer/map bundles, repository history, signer, credentials or commerce service are included. This is a ready-built distribution, not the full source/build repository. Preserve LICENSE, NOTICE and THIRD-PARTY-LICENSES.txt. Runtime and package files come from commit 739ac13aa8da8ca75b630d163dca606847c47869; SECURITY.md comes from public policy repository commit 19ca240fca29ea64e984fe32a464c45d6c11e8aa. PROVENANCE.json records both sources.
+No Premium/layer/map bundles, repository history, signer, credentials or commerce service are included. This is a ready-built distribution, not the full source/build repository. Preserve LICENSE, NOTICE and THIRD-PARTY-LICENSES.txt. Runtime and package files come from commit 95f093ba8d388c579d9f94701d3322c728c77632; SECURITY.md comes from public policy repository commit 19ca240fca29ea64e984fe32a464c45d6c11e8aa. PROVENANCE.json records both sources.
 
 [Getting started](https://westcoast-charts.com/docs/getting-started/) · [Accessibility](https://westcoast-charts.com/docs/accessibility/) · [Theming](https://westcoast-charts.com/docs/theming/)

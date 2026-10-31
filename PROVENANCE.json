@@ -1,7 +1,7 @@
 {
   "distribution": "public-mit-core-distribution",
   "version": "1.1.5",
-  "sourceCommit": "739ac13aa8da8ca75b630d163dca606847c47869",
+  "sourceCommit": "95f093ba8d388c579d9f94701d3322c728c77632",
   "sourceTag": null,
   "sourceRepositoryIncluded": false,
   "premiumRuntimeIncluded": false,
@@ -63,26 +63,26 @@
     },
     {
       "path": "dist/agent/validate.common.js",
-      "bytes": 183793,
-      "sha256": "87ebe6d3854c79b86bfb79e0ab2c99e32ac5afae6bf278eee3c690fb01c97e36",
+      "bytes": 184107,
+      "sha256": "bc064bff1b7050eeab030ebda65d3bce9006b9fd5df278baa7d40870cef0a5e4",
       "source": "dist/agent/validate.common.js"
     },
     {
       "path": "dist/agent/validate.esm.js",
-      "bytes": 183913,
-      "sha256": "6aea563f5da28e7ac7c78d5d899b10df7911b3884251a52dc9b3f26631fd38ba",
+      "bytes": 184227,
+      "sha256": "3b190b4ed75f37d864389ce0ea4da9c4edc7a0ede5738bd53e0e860dddb63eb6",
       "source": "dist/agent/validate.esm.js"
     },
     {
       "path": "dist/agent/validate.js",
-      "bytes": 394411,
-      "sha256": "c93ef8861931b3218be8482746e5823404b44baaf2b2cca13cca9b8c70b0f1f8",
+      "bytes": 395168,
+      "sha256": "52ac651a295fd8a9b01186556ff04d9cb813f4505e37ada3b5f929aa710ed36c",
       "source": "dist/agent/validate.js"
     },
     {
       "path": "dist/agent/validate.min.js",
-      "bytes": 184020,
-      "sha256": "a52c77d743914fbca15450ba738751685133c57faf4db6d4f4da2d0ea88b49e5",
+      "bytes": 184334,
+      "sha256": "b93ad049163acd982a1e7f29a871d45ccd993a5aed392c03584f934cc9621297",
       "source": "dist/agent/validate.min.js"
     },
     {
@@ -303,32 +303,32 @@
     },
     {
       "path": "dist/features/trellis-shared.common.js",
-      "bytes": 49669,
-      "sha256": "c8b436e87b5f14bec271919b6b4ed69cca77aa902d1a6b507575a2a7bfb2bae3",
+      "bytes": 49749,
+      "sha256": "61d1c07f0aa013578528bc0d806a3169c6411bb6a00d4a90fb1f6ce34db368d4",
       "source": "dist/features/trellis-shared.common.js"
     },
     {
       "path": "dist/features/trellis-shared.esm.js",
-      "bytes": 49488,
-      "sha256": "80bd402d6c1c761c3b4387a9297f0f5cb985cd00dd68b203712ed8b82acbd80b",
+      "bytes": 49571,
+      "sha256": "982df9475142fdc2f8b6082ee91a3f2d8fddfe7dc44487395d60a517de1644d1",
       "source": "dist/features/trellis-shared.esm.js"
     },
     {
       "path": "dist/features/trellis.common.js",
-      "bytes": 3906,
-      "sha256": "961b3947f0017b8ba1d325872e731cd7c533df6ace2f0ef9387c04ed5aa25e40",
+      "bytes": 3956,
+      "sha256": "947e7c9efbed7d272164e7e7b373129a76c515ba5c9b322ee045c8214c362d64",
       "source": "dist/features/trellis.common.js"
     },
     {
       "path": "dist/features/trellis.esm.js",
-      "bytes": 3850,
-      "sha256": "bab4826b163dde0f2ee2bfd76cf20230d02bb429f106cc00ccb40c2fa0af21cb",
+      "bytes": 3900,
+      "sha256": "063b79006d430ff39dc80f22f1c6a807b09e3f47c7581811bcc7b0c5faeb0fc2",
       "source": "dist/features/trellis.esm.js"
     },
     {
       "path": "dist/features/trellis.min.js",
-      "bytes": 53292,
-      "sha256": "b9befba7c56ab527aab06810705b2da35bfd63a873ed9edf270041e3c042af57",
+      "bytes": 53425,
+      "sha256": "d3aee5c2bf75aabcd3729d2f5bcae3b7f0e1937148af0f4cd28d61cb7554881f",
       "source": "dist/features/trellis.min.js"
     },
     {
@@ -603,14 +603,14 @@
     },
     {
       "path": "dist/schema/wcc-options.1.1.5.schema.json",
-      "bytes": 635625,
-      "sha256": "9b21250113d86cc79bd7cf9ca00363e9e9f9646f5416d9e60de27fad1636a1f1",
+      "bytes": 635796,
+      "sha256": "70a0d64fef8ff735ddfdf71d1ebfa915396db1b237b5dd3f059c73d630e193d6",
       "source": "dist/schema/wcc-options.1.1.5.schema.json"
     },
     {
       "path": "dist/schema/wcc-options.schema.json",
-      "bytes": 635625,
-      "sha256": "9b21250113d86cc79bd7cf9ca00363e9e9f9646f5416d9e60de27fad1636a1f1",
+      "bytes": 635796,
+      "sha256": "70a0d64fef8ff735ddfdf71d1ebfa915396db1b237b5dd3f059c73d630e193d6",
       "source": "dist/schema/wcc-options.schema.json"
     },
     {
@@ -945,20 +945,20 @@
     },
     {
       "path": "dist/west-coast-charts.full.common.js",
-      "bytes": 1242976,
-      "sha256": "917d6702e593e0a5aadc664a3699323f154328a1a6831bc4c6828b88633d81b6",
+      "bytes": 1243110,
+      "sha256": "ede4f315b85009682fa9a2ae9cc21f878811c72ee9cbd0d7cd2da2d6397acc21",
       "source": "dist/west-coast-charts.full.common.js"
     },
     {
       "path": "dist/west-coast-charts.full.esm.js",
-      "bytes": 1243006,
-      "sha256": "95bfcad34bf9b47a981316ac29a791d396777607bc14eaaad00925bf84eedf8c",
+      "bytes": 1243140,
+      "sha256": "097ebea54e62ad83ee2ce3f707ef6e54e5b6612ca2fd6940cd0ddd71bb5ecd09",
       "source": "dist/west-coast-charts.full.esm.js"
     },
     {
       "path": "dist/west-coast-charts.full.min.js",
-      "bytes": 1243250,
-      "sha256": "e886cd6f92a3675304694036eee3ac8ad5a5a9ed58d43ec195094c7c102c23e0",
+      "bytes": 1243384,
+      "sha256": "9dcc55ad63d73ea648da5305570e6a0a2caff0ccaddc95cbfa911d13061497a1",
       "source": "dist/west-coast-charts.full.min.js"
     },
     {
@@ -1017,8 +1017,8 @@
     },
     {
       "path": "types/wcc-options.d.ts",
-      "bytes": 180640,
-      "sha256": "d2d4dc54c221877ea56ca2482266c36ac3c4424ae9981085e2c4601df82d3edc",
+      "bytes": 180750,
+      "sha256": "9a39917f40b9869cca958303c2cec8440415bf42c2da495ba2d2c0b516315cfa",
       "source": "types/wcc-options.d.ts"
     },
     {

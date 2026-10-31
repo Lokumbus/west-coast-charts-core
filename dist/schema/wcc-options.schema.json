@@ -21851,6 +21851,11 @@
      "type": "string",
      "description": "Ring colour; not set uses the palette."
     },
+    "gap": {
+     "type": "number",
+     "description": "'cells' / 'trace' / 'range': radial space to the next layer in pixels. Default: `15`.",
+     "default": 15
+    },
     "bandsLow": {
      "type": "array",
      "items": {
