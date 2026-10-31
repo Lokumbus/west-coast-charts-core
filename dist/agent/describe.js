@@ -1,5 +1,5 @@
 /*!
- * West Coast Charts chart.describe() v1.1.4
+ * West Coast Charts chart.describe() v1.1.5
  * (c) 2026 West Coast Software - MIT License
  */
 (function (global, factory) {
@@ -401,10 +401,11 @@
     }
     // generic premium type: series from the options, marks from the drawn table
     const cs = (w.config.series || []).filter(s => s && typeof s === 'object');
+    if (model.type === 'marimekko') model.hidden = Array.from(r.state.hidden || []);
     model.series = cs.map((s, i) => ({
       index: i,
       name: str(s.name || 'Series ' + (i + 1)),
-      hidden: false,
+      hidden: model.hidden.indexOf(str(s.name || 'Series ' + (i + 1))) > -1,
       count: Array.isArray(s.data) ? s.data.length : 0,
       unit: null,
       min: null,
@@ -412,14 +413,26 @@
       aggregate: null
     }));
     const cols = model.table.columns;
-    (tm && tm.rows || []).forEach(row => row.slice(1).forEach((c, k) => model.marks.push({
+    (tm && tm.rows || []).forEach((row, ri) => row.slice(1).forEach((c, k) => model.marks.push({
       series: str(cols[k + 1]),
       seriesIndex: k,
       category: str(row[0]),
-      value: num(c),
+      value: num(tm.rawRows && tm.rawRows[ri] ? tm.rawRows[ri][k + 1] : c),
       formatted: tm.cell ? tm.cell(c, k + 1) : str(c)
     })));
     model.marksTotal = tm ? tm.total : 0;
+    if (r.unmatchedRows) model.unmatched = {
+      count: r.unmatchedRows.length,
+      ids: r.unmatchedIds.slice()
+    };
+    if (r.skippedLinks) model.skipped = {
+      count: r.skippedLinks.length,
+      items: r.skippedLinks.map(x => ({
+        seriesIndex: x.seriesIndex,
+        dataPointIndex: x.dataPointIndex,
+        reason: x.reason
+      }))
+    };
     return model;
   }
 
@@ -459,6 +472,8 @@
       table: m.table
     };
     if (m.categories) out.categories = m.categories;
+    if (m.unmatched) out.unmatched = m.unmatched;
+    if (m.skipped) out.skipped = m.skipped;
     return out;
   }
 

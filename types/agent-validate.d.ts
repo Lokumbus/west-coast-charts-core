@@ -55,6 +55,8 @@ export interface WccValidateOptions {
   maxIssues?: number
   /** Another schema (dist/schema/wcc-options.<version>.schema.json without docs). */
   schema?: object
+  /** Optional registered-map metadata for pure validation outside the plugin. Browser plugin supplies it automatically. */
+  mapMetadata?: { name?: string; ids?: string[]; keys: string[] } | null
 }
 
 export const EXIT: { ok: 0; internal: 1; usage: 2; notFound: 3; license: 4; conflict: 5; confirmation: 6 }

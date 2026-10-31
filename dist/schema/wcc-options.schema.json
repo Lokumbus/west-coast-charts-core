@@ -1,9 +1,9 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://westcoastcharts.dev/schema/1.1.4/wcc-options.schema.json",
+ "$id": "https://westcoastcharts.dev/schema/1.1.5/wcc-options.schema.json",
  "title": "West Coast Charts options",
  "description": "The options object of new WestCoastCharts(el, options), generated from types/*.d.ts. Functions are marked \"x-wcc-type\": \"function\" (not expressible in JSON). Premium chart types and their plotOptions need west-coast-charts/premium (\"x-wcc-license\": \"premium\").",
- "x-wcc-version": "1.1.4",
+ "x-wcc-version": "1.1.5",
  "type": "object",
  "properties": {
   "annotations": {
@@ -752,9 +752,172 @@
      ],
      "description": "West Coast Charts: how HTML returned by formatters / custom functions is\ninserted. true (default) = built-in sanitizer, function = custom sanitizer,\nfalse = raw innerHTML (ApexCharts 4.7.0 behaviour, trusted input only).\nPlain data strings (series names, categories, labels) are always text."
     },
+    "eventSignature": {
+     "type": "string",
+     "enum": [
+      "legacy",
+      "standard"
+     ],
+     "description": "Premium/feature convention: legacy (default) retains family signatures; standard uses (eventOrNull, chart, payload). Core lifecycle callbacks are unchanged."
+    },
     "events": {
      "type": "object",
      "properties": {
+      "beatChange": {
+       "x-wcc-type": "function"
+      },
+      "childrenLoad": {
+       "x-wcc-type": "function"
+      },
+      "childrenLoadError": {
+       "x-wcc-type": "function"
+      },
+      "crossFilter": {
+       "x-wcc-type": "function"
+      },
+      "dataPointMouseEnter": {
+       "x-wcc-type": "function",
+       "description": "Called when the pointer enters a data point shape."
+      },
+      "dataPointMouseLeave": {
+       "x-wcc-type": "function",
+       "description": "Called when the pointer leaves a data point shape."
+      },
+      "dataPointSelection": {
+       "x-wcc-type": "function",
+       "description": "Called when a data point (bar, slice, marker) is clicked and becomes selected or unselected."
+      },
+      "dependencyCreate": {
+       "x-wcc-type": "function"
+      },
+      "dependencyDelete": {
+       "x-wcc-type": "function"
+      },
+      "drawingChange": {
+       "x-wcc-type": "function"
+      },
+      "drillDownEnd": {
+       "x-wcc-type": "function"
+      },
+      "drillDownError": {
+       "x-wcc-type": "function"
+      },
+      "drillDownStart": {
+       "x-wcc-type": "function"
+      },
+      "drillUp": {
+       "x-wcc-type": "function"
+      },
+      "drilldown": {
+       "x-wcc-type": "function"
+      },
+      "drilldownError": {
+       "x-wcc-type": "function"
+      },
+      "drillup": {
+       "x-wcc-type": "function"
+      },
+      "error": {
+       "x-wcc-type": "function"
+      },
+      "filterChange": {
+       "x-wcc-type": "function"
+      },
+      "groupToggle": {
+       "x-wcc-type": "function"
+      },
+      "highlightFilterChanged": {
+       "x-wcc-type": "function"
+      },
+      "historyChange": {
+       "x-wcc-type": "function"
+      },
+      "layoutSettled": {
+       "x-wcc-type": "function"
+      },
+      "legendClick": {
+       "x-wcc-type": "function",
+       "description": "Called when a legend entry is clicked, with the series index; runs before the default\nshow/hide toggle."
+      },
+      "nodeDragEnd": {
+       "x-wcc-type": "function"
+      },
+      "nodeMove": {
+       "x-wcc-type": "function"
+      },
+      "nodeToggle": {
+       "x-wcc-type": "function"
+      },
+      "panelMounted": {
+       "x-wcc-type": "function"
+      },
+      "panelPromoted": {
+       "x-wcc-type": "function"
+      },
+      "panelRestored": {
+       "x-wcc-type": "function"
+      },
+      "perspectiveApplied": {
+       "x-wcc-type": "function"
+      },
+      "perspectiveCaptured": {
+       "x-wcc-type": "function"
+      },
+      "playbackFrame": {
+       "x-wcc-type": "function"
+      },
+      "quintLens": {
+       "x-wcc-type": "function"
+      },
+      "quintPin": {
+       "x-wcc-type": "function"
+      },
+      "quintSelect": {
+       "x-wcc-type": "function"
+      },
+      "scheduleChange": {
+       "x-wcc-type": "function"
+      },
+      "scheduleConflict": {
+       "x-wcc-type": "function"
+      },
+      "scheduleSelect": {
+       "x-wcc-type": "function"
+      },
+      "slotClick": {
+       "x-wcc-type": "function"
+      },
+      "taskChange": {
+       "x-wcc-type": "function"
+      },
+      "taskCreate": {
+       "x-wcc-type": "function"
+      },
+      "taskDelete": {
+       "x-wcc-type": "function"
+      },
+      "trellisMounted": {
+       "x-wcc-type": "function"
+      },
+      "wccDrillPathChange": {
+       "x-wcc-type": "function"
+      },
+      "wccFrameChange": {
+       "x-wcc-type": "function"
+      },
+      "wccHistoryChange": {
+       "x-wcc-type": "function"
+      },
+      "wccNarrativeState": {
+       "x-wcc-type": "function"
+      },
+      "wccOrientChange": {
+       "x-wcc-type": "function"
+      },
+      "zoomed": {
+       "x-wcc-type": "function",
+       "description": "Called after a zoom (selection zoom, zoom buttons, wheel or reset), with the new x and y\nranges."
+      },
       "animationEnd": {
        "x-wcc-type": "function",
        "description": "Called once the initial (or update) animation of the series has finished."
@@ -762,82 +925,6 @@
       "beforeMount": {
        "x-wcc-type": "function",
        "description": "Called after the options are processed and before the SVG is put into the page."
-      },
-      "scheduleChange": {
-       "x-wcc-type": "function",
-       "description": "schedule (layers/schedule): a drag, resize or keyboard move proposes a change `{ id, from, to, conflicts, added, resolved }`; the data is never changed."
-      },
-      "scheduleSelect": {
-       "x-wcc-type": "function",
-       "description": "schedule: an appointment or a person was selected (null = cleared)."
-      },
-      "slotClick": {
-       "x-wcc-type": "function",
-       "description": "schedule: a click on free time `{ time, lane, by, day }`."
-      },
-      "scheduleConflict": {
-       "x-wcc-type": "function",
-       "description": "schedule: emitted once per render when the plan has conflicts (the conflicts() list)."
-      },
-      "taskChange": {
-       "x-wcc-type": "function",
-       "description": "Gantt: a task was moved, resized or edited; return `false` to cancel. Premium charts call it as `(event, chart, info)`."
-      },
-      "taskCreate": {
-       "x-wcc-type": "function",
-       "description": "Gantt: a task is created; return `false` to cancel. Premium charts call it as `(event, chart, info)`."
-      },
-      "taskDelete": {
-       "x-wcc-type": "function",
-       "description": "Gantt: a task is deleted; return `false` to cancel. Premium charts call it as `(event, chart, info)`."
-      },
-      "historyChange": {
-       "x-wcc-type": "function",
-       "description": "Gantt: the undo/redo history changed. Premium charts call it as `(event, chart, info)`."
-      },
-      "groupToggle": {
-       "x-wcc-type": "function",
-       "description": "Gantt: a group was collapsed or expanded. Premium charts call it as `(event, chart, info)`."
-      },
-      "dependencyCreate": {
-       "x-wcc-type": "function",
-       "description": "Gantt: a dependency is created; return `false` to cancel. Premium charts call it as `(event, chart, info)`."
-      },
-      "dependencyDelete": {
-       "x-wcc-type": "function",
-       "description": "Gantt: a dependency is deleted; return `false` to cancel. Premium charts call it as `(event, chart, info)`."
-      },
-      "nodeMove": {
-       "x-wcc-type": "function",
-       "description": "Sankey: a node was dragged. Premium charts call it as `(event, chart, info)`."
-      },
-      "childrenLoad": {
-       "x-wcc-type": "function",
-       "description": "Tree: lazily loaded children arrived. Premium charts call it as `(event, chart, info)`."
-      },
-      "childrenLoadError": {
-       "x-wcc-type": "function",
-       "description": "Tree: loading children failed. Premium charts call it as `(event, chart, info)`."
-      },
-      "drilldown": {
-       "x-wcc-type": "function",
-       "description": "Drilldown (premium charts, sunburst, icicle): a level opens; premium charts cancel on `false`."
-      },
-      "drillup": {
-       "x-wcc-type": "function",
-       "description": "Drilldown: a level closes; premium charts cancel on `false`."
-      },
-      "drawingChange": {
-       "x-wcc-type": "function",
-       "description": "Stock: a drawing was added, changed or removed. Premium charts call it as `(event, chart, info)`."
-      },
-      "wccHistoryChange": {
-       "x-wcc-type": "function",
-       "description": "history feature: the undo/redo position changed, `(chart, { index, size, canUndo, canRedo })`."
-      },
-      "wccOrientChange": {
-       "x-wcc-type": "function",
-       "description": "orient feature: the chart was turned, `(chart, { angle, previous, top, start, startAt, picked, ... })`."
       },
       "mounted": {
        "x-wcc-type": "function",
@@ -863,10 +950,6 @@
        "x-wcc-type": "function",
        "description": "Called when an x-axis label is clicked, with the label index."
       },
-      "legendClick": {
-       "x-wcc-type": "function",
-       "description": "Called when a legend entry is clicked, with the series index; runs before the default\nshow/hide toggle."
-      },
       "markerClick": {
        "x-wcc-type": "function",
        "description": "Called when a point marker is clicked, with the series and data indexes."
@@ -875,18 +958,6 @@
        "x-wcc-type": "function",
        "description": "Called while a selection range is drawn or moved, with the selected x (and y) range."
       },
-      "dataPointSelection": {
-       "x-wcc-type": "function",
-       "description": "Called when a data point (bar, slice, marker) is clicked and becomes selected or unselected."
-      },
-      "dataPointMouseEnter": {
-       "x-wcc-type": "function",
-       "description": "Called when the pointer enters a data point shape."
-      },
-      "dataPointMouseLeave": {
-       "x-wcc-type": "function",
-       "description": "Called when the pointer leaves a data point shape."
-      },
       "beforeZoom": {
        "x-wcc-type": "function",
        "description": "Called before a zoom is applied, with the new x range; return `{ xaxis: { min, max } }` to\nchange the range that is used."
@@ -894,10 +965,6 @@
       "beforeResetZoom": {
        "x-wcc-type": "function",
        "description": "Called before the zoom is reset; return `{ xaxis: { min, max } }` to reset to a different\nrange."
-      },
-      "zoomed": {
-       "x-wcc-type": "function",
-       "description": "Called after a zoom (selection zoom, zoom buttons, wheel or reset), with the new x and y\nranges."
       },
       "scrolled": {
        "x-wcc-type": "function",
@@ -917,7 +984,7 @@
       }
      },
      "additionalProperties": false,
-     "description": "Callbacks for lifecycle and interaction events. Each receives the chart instance and an\nevent-specific options object."
+     "description": "Lifecycle/core callbacks plus premium/feature events. Named precise handler types are in premium-events.d.ts; inline callbacks remain permissive for compatibility."
     },
     "brush": {
      "type": "object",
@@ -1689,8 +1756,8 @@
     "validate": {
      "type": "string",
      "enum": [
-      "warn",
       "error",
+      "warn",
       "off"
      ],
      "description": "Option check when the validator module is loaded ('west-coast-charts/agent/validate'):\n`'warn'` logs unknown options, wrong types and invalid values with a suggestion\n(console.warn, once per chart), `'error'` also makes `render()` reject, `'off'` skips the\ncheck. Without the module nothing is checked. Default: `'warn'`.",
@@ -6361,6 +6428,11 @@
     "radialColumn": {
      "type": "object",
      "properties": {
+      "readabilityWarnings": {
+       "type": "boolean",
+       "description": "Warn once if inner rings are thinner than 8 px or heat cells below 2 px per slot. No values/layers are removed. Default: `true`.",
+       "default": true
+      },
       "aggregate": {
        "type": "string",
        "enum": [
@@ -7227,7 +7299,14 @@
           "type": "array",
           "prefixItems": [
            {
-            "type": "string"
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "$ref": "#/$defs/WccPremiumPlugin"
+             }
+            ]
            },
            {
             "type": "object",
@@ -7239,7 +7318,7 @@
          }
         ]
        },
-       "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+       "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
       }
      },
      "additionalProperties": false,
@@ -12589,6 +12668,21 @@
      ],
      "description": "gauge: take the latest value of this column series (name, index or true = first); it stays in the ring"
     },
+    "bandsLow": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/RadialVitalsBand"
+     },
+     "description": "Span lower-value bands. Missing keeps the generic shared fallback; choose a policy explicitly to avoid a warning."
+    },
+    "bandsLowPolicy": {
+     "type": "string",
+     "enum": [
+      "high-only",
+      "shared"
+     ],
+     "description": "Span classification when bandsLow is absent; generic span default is shared, VitalsClock defaults high-only."
+    },
     "bands": {
      "anyOf": [
       {
@@ -12618,8 +12712,7 @@
         "additionalProperties": false
        }
       }
-     ],
-     "description": "gauge: colour by value band, ascending: [{ to: 60, color }]"
+     ]
     },
     "formatter": {
      "x-wcc-type": "function",
@@ -12924,6 +13017,11 @@
   "RadialColumnOptions": {
    "type": "object",
    "properties": {
+    "readabilityWarnings": {
+     "type": "boolean",
+     "description": "Warn once if inner rings are thinner than 8 px or heat cells below 2 px per slot. No values/layers are removed. Default: `true`.",
+     "default": true
+    },
     "aggregate": {
      "type": "string",
      "enum": [
@@ -14655,7 +14753,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -14667,7 +14772,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "matrix": {
      "anyOf": [
@@ -15169,7 +15274,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -15181,7 +15293,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "rowHeight": {
      "type": "number",
@@ -16436,7 +16548,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -16448,7 +16567,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "map": {
      "anyOf": [
@@ -17037,6 +17156,15 @@
      "description": "Framing: `'map'` shows the whole map, `'data'` frames the data, `'auto'` frames point, arc and\nroute layers but shows the whole map for choropleths. Default: `'auto'`.",
      "default": "auto"
     },
+    "fitParts": {
+     "type": "string",
+     "enum": [
+      "all",
+      "largest"
+     ],
+     "description": "Geometry used only for data framing: all region polygons, or each region's largest polygon. Drawing retains every polygon. Default: `'all'`.",
+     "default": "all"
+    },
     "zoom": {
      "type": "object",
      "properties": {
@@ -17206,7 +17334,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -17218,7 +17353,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "gap": {
      "type": "number",
@@ -17808,7 +17943,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -17820,7 +17962,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "renderer": {
      "type": "string",
@@ -17921,7 +18063,8 @@
        "type": "string",
        "enum": [
         "force",
-        "facet"
+        "facet",
+        "preset"
        ],
        "description": "`'force'`: the force simulation. `'facet'`: a deterministic projection on concentric regular\npolygon shells (core in the centre, groups as filled facet sectors, causal paths across;\noptions under `facet`). Default: `'force'`.",
        "default": "force"
@@ -18373,7 +18516,7 @@
     "defaults": {
      "type": "object",
      "additionalProperties": true,
-     "description": "Default options of the plugin; the `['name', options]` form overrides them."
+     "description": "Default options of the plugin; the `[nameOrPlugin, options]` form overrides them."
     },
     "reserve": {
      "x-wcc-type": "function",
@@ -18475,7 +18618,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -18487,7 +18637,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "time": {
      "type": "object",
@@ -18717,7 +18867,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -18729,7 +18886,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "orientation": {
      "type": "string",
@@ -19123,7 +19280,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -19135,7 +19299,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "date": {
      "type": "string",
@@ -19909,7 +20073,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -19921,7 +20092,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "enabled": {
      "type": "boolean",
@@ -20558,7 +20729,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -20570,7 +20748,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "layout": {
      "type": "string",
@@ -21397,7 +21575,14 @@
         "type": "array",
         "prefixItems": [
          {
-          "type": "string"
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/WccPremiumPlugin"
+           }
+          ]
          },
          {
           "type": "object",
@@ -21409,7 +21594,7 @@
        }
       ]
      },
-     "description": "Plugins of this chart: plugin objects, registered names, or `['name', options]`."
+     "description": "Plugins of this chart: plugin objects, registered names, or `[nameOrPlugin, options]`."
     },
     "time": {
      "type": "object",
@@ -21443,7 +21628,12 @@
        "type": "number"
       }
      ],
-     "description": "The current time (now hand); later slots are \"no data yet\"."
+     "description": "Snapshot cutoff for all measurement channels; future measurements are excluded."
+    },
+    "followNow": {
+     "type": "boolean",
+     "description": "Advance now to later appended measurements. Historical arrivals never move it backwards. Default: `false`.",
+     "default": false
     },
     "timeZone": {
      "type": "string",
@@ -21666,7 +21856,15 @@
      "items": {
       "$ref": "#/$defs/RadialVitalsBand"
      },
-     "description": "'range': bands for the low value (e.g. diastolic); not set uses `bands`."
+     "description": "'range': caller-supplied bands for the low value, independent of the high-value bands."
+    },
+    "bandsLowPolicy": {
+     "type": "string",
+     "enum": [
+      "high-only",
+      "shared"
+     ],
+     "description": "Missing low bands: classify only high (default) or explicitly share high bands. An implicit high-only fallback warns once."
     },
     "gapAfter": {
      "type": "number",

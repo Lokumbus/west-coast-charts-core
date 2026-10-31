@@ -58,6 +58,14 @@ maps/world.js, maps/world.json - 177 countries, 1:110m
   Attributes (name, ISO 3166 codes, continent, subregion): Natural Earth
   1:110m Cultural Vectors, Admin 0 - Countries. Natural Earth is in the
   public domain (https://www.naturalearthdata.com/about/terms-of-use/).
+maps/world-small-states.js, maps/world-small-states.json - optional 185-region map
+  Retains the above 177-region 1:110m geometry and adds actual 1:10m boundaries
+  for AND, BHR, LIE, MCO, MLT, SGP, SMR and VAT from Natural Earth
+  ne_10m_admin_0_countries.geojson (public domain), official source commit
+  ca96624a56bd078437bca8184e78163e5039ad19. Selected source features, the full
+  source SHA-256, pinned URL and regeneration instructions are preserved in
+  maps/source/natural-earth-small-states.geojson and maps/SMALL-STATES.md.
+  This optional supplement does not claim complete ISO country/territory coverage.
 maps/us-states.js, maps/us-states.json - 50 states, DC and territories, 1:10m
   Geometry: us-atlas 3.0.1 (states-10m.json), Copyright 2013-2019 Michael Bostock,
   ISC License; derived from US Census Bureau cartographic boundary files

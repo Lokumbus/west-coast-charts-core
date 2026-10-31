@@ -71,8 +71,10 @@
         "additionalProperties": false
       }
     },
-    "marksTotal": { "type": "integer", "minimum": 0 },
-    "marksTruncated": { "type": "boolean" },
+    "marksTotal": {"type": "integer", "minimum": 0, "description": "Untruncated row count: core maximum categories per series; Premium table rows. marks is flattened across value columns, so its length may differ. maxRows applies to rows."},
+    "marksTruncated": {"type": "boolean", "description": "True when the row count exceeds maxRows; not a comparison of flattened marks.length."},
+    "unmatched": {"type": "object", "required": ["count", "ids"], "properties": {"count": {"type": "integer", "minimum": 0}, "ids": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false},
+    "skipped": {"type": "object", "required": ["count", "items"], "properties": {"count": {"type": "integer", "minimum": 0}, "items": {"type": "array", "items": {"type": "object", "required": ["seriesIndex", "dataPointIndex", "reason"], "properties": {"seriesIndex": {"type": "integer"}, "dataPointIndex": {"type": "integer"}, "reason": {"type": "string"}}, "additionalProperties": false}}}, "additionalProperties": false},
     "aggregate": {
       "type": ["object", "null"],
       "description": "chart-level combined value the chart shows (radialColumn centre honouring plotOptions.radialColumn.aggregate, pie total, radialBar total)",

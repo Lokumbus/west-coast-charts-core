@@ -1,11 +1,11 @@
 {
   "schema": "wcc-reviewed-release-archive/1",
   "name": "west-coast-charts",
-  "version": "1.1.4",
-  "archive": "releases/west-coast-charts-1.1.4.tgz",
-  "sha256": "8fecd208e94858a5d9758ec5f9098859afd62f62724c296bdf63406c7cb558fd",
-  "bytes": 3345116,
-  "sourceCommit": "d999ea3db78e810ffee31877fa7c4b3824447dd9",
+  "version": "1.1.5",
+  "archive": "releases/west-coast-charts-1.1.5.tgz",
+  "sha256": "0c0cf5d74bfd9786a8ddf0b96de67abdd08045f955af765efb5be715aa2cda87",
+  "bytes": 3360703,
+  "sourceCommit": "739ac13aa8da8ca75b630d163dca606847c47869",
   "securityPolicy": {
     "sourceRepository": "https://github.com/Lokumbus/west-coast-charts-core",
     "sourceCommit": "19ca240fca29ea64e984fe32a464c45d6c11e8aa",
