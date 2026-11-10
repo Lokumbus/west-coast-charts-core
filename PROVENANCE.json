@@ -1,6 +1,8 @@
 {
   "distribution": "public-mit-core-distribution",
-  "version": "1.1.5",
+  "version": "1.1.6",
+  "payloadIdenticalToVersion": "1.1.5",
+  "releaseKind": "metadata-only",
   "sourceCommit": "95f093ba8d388c579d9f94701d3322c728c77632",
   "sourceTag": null,
   "sourceRepositoryIncluded": false,
