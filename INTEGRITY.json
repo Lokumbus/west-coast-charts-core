@@ -1,5 +1,5 @@
 {
-  "version": "1.1.5",
+  "version": "1.1.6",
   "files": [
     {
       "path": "LICENSE",
@@ -11,11 +11,11 @@
     },
     {
       "path": "PROVENANCE.json",
-      "sha256": "0080f9fdf1450a73bc4ea4643bfe68d8fb9ff1ca9ab5d67ce384c376c0021a88"
+      "sha256": "2774077c9c160fe5fb3b2cd0c15776332af9af775ee69c25bb3ddf552ce471b3"
     },
     {
       "path": "README.md",
-      "sha256": "fcc9a2d336bac99d9d763bb4d264f7ef2059e4e9b546a702742b0427a9c894f8"
+      "sha256": "86b0614b6f7db0fc8aca319d15ed7f2672c15c6e249960ebe8a3a9d0c2860de5"
     },
     {
       "path": "SECURITY.md",
@@ -655,7 +655,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "b7a5d89975df88c3ac41be47e09597665676140a7ac279a0eb8788e030cf4ee5"
+      "sha256": "9d40ecc2d721846d27ccca2590fac11597dcb0176cf08a2f7219a270a8a3d8f5"
     },
     {
       "path": "types/agent-describe.d.ts",
